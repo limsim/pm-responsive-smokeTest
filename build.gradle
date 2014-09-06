@@ -1,0 +1,28 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'org.testng', name: 'testng', version: '6.8.8'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.41.0'
+
+}
+
+test {
+    useTestNG()
+
+    // listen to events in the test execution lifecycle
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
+
+    // listen to standard out and standard error of the test JVM(s)
+    onOutput { descriptor, event ->
+        logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
+    }
+}

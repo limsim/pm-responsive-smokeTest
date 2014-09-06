@@ -1,0 +1,12 @@
+# Created by .gitignore support plugin (hsz.mobi)
+### Gradle template
+.gradle
+build/
+
+# IntelliJ
+.idea/
+pm-responsive-smokeTest.iml
+
+
+# Ignore Gradle GUI config
+gradle-app.setting
