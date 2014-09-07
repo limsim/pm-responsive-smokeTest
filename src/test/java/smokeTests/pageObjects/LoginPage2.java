@@ -4,7 +4,6 @@ import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage2 {
@@ -38,8 +37,8 @@ public class LoginPage2 {
 		return this;
 	}
 
-	public AllOffersPage clickSubmit() {
+	public OfferList clickSubmit() {
 		submitButton.click();
-		return new AllOffersPage(driver);
+		return new OfferList(driver);
 	}
 }
