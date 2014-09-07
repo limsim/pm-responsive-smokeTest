@@ -1,0 +1,608 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:fb="https://www.facebook.com/2008/fbml">
+ <head> 
+  <meta name="robots" content="noodp,noydir" /> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+  <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" /> 
+  <meta name="format-detection" content="telephone=no" /> 
+  <meta http-equiv="content-type" content="text/html, charset=UTF-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+  <link href="http://127.0.0.1:8087/moments/_assets/images/icon.ico" rel="shortcut icon" /> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/jquery-1.7.2.min.js">
+</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/class.min.js">
+</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/modernizr.js">
+</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/knockout-2.1.0.min.js">
+</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/desktop/jquery.raty.min.js">
+</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/jquery-ui-1.9.2.custom.min.js">
+</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/jquery.lazyload.min.js">
+</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/jquery.bgiframe.min.js">
+</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/jquery.corner.min.js">
+</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/html5shiv.js">
+</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/initializer/header.js">
+</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/initializer/googleanalytics.js">
+</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/desktop/jquery.tinyscrollbar.min.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/jquery.cookie.min.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/jquery.ba-hashchange.min.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/ajaxutil.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/address.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/onlinemerchant.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/instoreoffer.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/instoremerchant.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/scrolldetector.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/requestinitiator.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/onlineoffer.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/interactivemap.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/searchmomentviewmodel.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/locationdetector.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/activateiphonelabel.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/cookiechecker.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/map.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/momentsmodel.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/offerredemption.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/poolingimage.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/reportproblem.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/browsersupport.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/iphoneslider.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/userpreferences.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/zeroratinghelper.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/mapmanager.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/dialog.manager.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/handler/header.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/distanceinmilescalculator.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/handler/home.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/handler/offerdetails.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/handler/savedoffer.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/handler/search.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/handler/registration.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/handler/togglingfordistanceinmilesandother.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/canvg.js"></script> 
+  <title>O2 | Offers </title>  
+  <meta name="description" content="iOS position:fixed" /> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/initializer/home.js">
+		</script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/moments/common/interactivemap.js">
+        </script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/jquery.ba-hashchange.min.js"></script> 
+  <script type="text/html" id="singleOfferTemplate">
+		    	<div class="momentDetailsContainerWrapper" data-bind="foreach: {data: offers, afterRender: applyRatings}" >
+					<div class="mainOfferContainer" data-bind="css: {'InStoreOfferContainer': offerType() == 'InStore', 'OnlineOfferContainer': offerType() == 'Online'}">
+	<div class="momentDetailsContainer" id="momentDetailsContainerInList">
+		<div class="linkandDesContainer">
+			<a class="offerDetailLink" data-bind="attr: { data_offerid: offer._id, href:'./offerdetails?offerId=' + offer._id + '&latitude=' + $root.getLat() + '&longitude=' + $root.getLon()}">
+		    	<img data-bind="attr: {'data-original': offer.merchant_logo_href, src: 'http://127.0.0.1:8087/moments/_assets/images/' + $root.getCategoryImage(category), id: offerType()+'merchantlogo_'+$parentContext.$index()+'_'+$index()}" class="momentImg offerDetailLink lazy"/>
+		    </a>
+    		<div class="momentDescContainer" id="momentDescContainerInList">
+				<a class="offerDetailLink" data-bind="attr: { data_offerid: offer._id, href:'./offerdetails?offerId=' + offer._id + '&latitude=' + $root.getLat() + '&longitude=' + $root.getLon()}" id="offertitlelink">
+					<h1 data-bind="text: offer.merchant_name, attr: {id: offerType()+'merchantName_'+$parentContext.$index()+'_'+$index()}"></h1>
+				</a>
+				<div data-bind="if: offer.exclusive=='true'" class="exclusiveFlag" >
+					<img id="exclusiveFlag" src="http://127.0.0.1:8087/moments/_assets/images/exclusive_corner.png"/>
+				</div>
+				<p id="momentTitle"> 
+					<a class="offerDetailLink" data-bind="attr: { data_offerid: offer._id, id: offerType()+'momentTitle_'+$parentContext.$index()+'_'+$index(), href:'./offerdetails?offerId=' + offer._id + '&latitude=' + $root.getLat() + '&longitude=' + $root.getLon()}, text: truncatedTitle()" id="offerDescriptionLink"></a>
+				</p>
+		    </div>
+		</div>
+		<div class="ratingAndDaysLeftContainer" id="ratingAndDaysLeftContainerInInstoreListing">
+			<div class="ratingContainer bold" id="rateContainerInList">
+				<div data-bind="attr: { data_rating: offer.average_rating, id: offerType()+'ratings_star_'+$parentContext.$index()+'_'+$index()}" class="ratings_star">
+				</div>
+				<div class="ratingLabel" data-bind="text: totalRatings, attr: {id: offerType()+'totalRatings_'+$parentContext.$index()+'_'+$index()}">
+				</div>
+				<div class="distanceDescContainer" data-bind="visible: offerType() == 'InStore'">
+					<div class="distanceIcon"></div>
+					<div data-bind="text: distanceInMiles, attr: {id: offerType()+'distance_'+$parentContext.$index()+'_'+$index()}" class="distanceDesc">
+					</div>
+				</div>	
+			</div>
+			<div data-bind="text: offerValidity, attr: {id: offerType()+'validity_'+$parentContext.$index()+'_'+$index()}, css: {'toggleTrue': offerValidity() != null}, style: { display : offerValidity() == null ? 'none' : 'block' }" class="ratingValuesCommomProperties noOfDaysLeft noOfDaysLeftInInstoreList">
+			</div>
+            <div data-bind="text: offerStock, css: {'toggleTrue': offerStock() != null}" class="stockLeft stockLeftInInstoreList">
+            </div>
+		</div>
+	</div>
+</div>
+<div class="dottedBorder">&nbsp;</div>
+				</div>
+		</script> 
+  <script type="text/html" id="multipleOfferTemplate">
+			<div id="InstoreOffersList" class="momentDetailsContainerWrapper">
+				<article class="stackedOfferContainer">
+    <div data-bind="css:{ }, attr: { id: 'stackedOffersList_'+offerType()+$index(), idx: offerType()+$index() }, click : function(event) { handleExpandView(offerType()+$index());}"  class="stackedview" >
+        <div class="momentDetailsContainer">
+            <a class="expandViewLink" id="merchantLogoLinkIninstoreoffer">
+                <img id="merchantlogo" data-bind="attr: {'data-original': merchantLogo, src: 'http://127.0.0.1:8087/moments/_assets/images/' + $root.getCategoryImage(category)}" class="momentImg lazy"/>
+            </a>
+            <div class="momentDescContainer" id="momentDescContainerinInstoreoffer">
+                <a class="expandViewLink" id="offertitlelink">
+                    <h1 id="merchantName" data-bind="text: merchantName" class="merchantNameinStackedOffer"></h1>
+                </a>
+                <p id="momentTitle">
+                    <a class="instoreOfferDetailLink" id="offerDescriptionLink" data-bind="attr: { data_offerid: offers()[0].offer._id, id: offers()[0].offerType()+'momentTitle_'+$index(), href:'./offerdetails?offerId=' + offers()[0].offer._id + '&latitude=' + $root.getLat() + '&longitude=' + $root.getLon()}, text: offers()[0].offer.title"></a>
+                </p>
+               
+                <div id="expandOffersdiv" style="display:none" data-bind="css: {'InStoreExpandedOffersContainer': offerType() == 'InStore', 'OnlineExpandedOffersContainer': offerType() == 'Online'}">
+                    <div data-bind="foreach: {data: offers, afterRender: applyRatings}" class="ExpandedStackedOfferContainer" id="ExpandedStackedOfferContainer" >
+                        <!-- ko if: $index()!= 0  -->
+                        <p id="momentTitle" >
+                            <a class="instoreOfferDetailLink" id="offerDescriptionLink" data-bind="attr: { data_offerid: offer._id, id: offerType()+'momentTitle_'+$parentContext.$index()+'_'+$index(), href:'./offerdetails?offerId=' + offer._id + '&latitude=' + $root.getLat() + '&longitude=' + $root.getLon()}, text: offer.title"></a>
+                        </p>
+                        <!-- /ko -->
+                            <div class="displayTable bottomAlignedRatingDetailsContainer">
+    <div class="ratingContainer displayTableCell rateContainerInListAddon" id="rateContainerInList">
+        <div class="ratings_star ratings_star_cell" data-bind="attr: { data_rating: offer.average_rating, id: offerType()+'ratings_star_'+$parentContext.$index()+'_'+$index()}" class="ratings_star ratings_star_cell"></div>
+    </div>
+    <div class="displayTableCell totalRatingCount">
+        <label class="bold" data-bind="text: totalRatings, attr: {id: offerType()+'totalRatings_'+$parentContext.$index()+'_'+$index()}">
+        </label>
+    </div>
+    <div class="displayTableCell">
+        <div class="distanceDescContainer" data-bind="visible: offerType() == 'InStore'" >
+            <div data-bind="text: distanceInMiles, attr: {id: offerType()+'distance_'+$parentContext.$index()+'_'+$index()}" class="ratingValuesCommomProperties distanceDesc">
+            </div>
+        </div>
+        <div data-bind="text: offerValidity, attr: {id: offerType()+'validity_'+$parentContext.$index()+'_'+$index()}, css: {'toggleTrue': offerValidity() != null}" class="ratingValuesCommomProperties noOfDaysLeft noOfDaysLeftInInstoreList">
+        </div>
+        <div   data-bind="text: offerStock, css: {'toggleTrue': offerStock() != null}" class="stockLeft ratingValuesCommomProperties stockLeftInInstoreList">
+        </div>
+    </div>
+</div>                        <div class="seperatorExpandedview"></div>
+                    </div>
+                </div>
+				 <div>
+                    <span class="moreMomentsAvailable bold" id="moreinstack" style="display:inline-block;" data-bind="text: getMoreMomentsMessage()"></span>
+                </div>
+                <div class="stackedstrip" id="collapsedStrip">
+                    <div class="stackedtext">
+                        <label id="noOfOffers" data-bind="text: getNoOfOffers()"></label>
+                    </div>
+                    <div class="stackedarrow"></div>
+                </div>
+            </div>
+            <div class="bluebottomstrip"></div>
+        </div>
+    </div>
+    <div class="expandedview" data-bind="attr: { id: 'expandedStrip_'+offerType()+$index() }, click : function() { handleCollapseView( offerType()+$index() ); }" style="display:none">
+        <div class="stackedtext">
+            <label></label>
+        </div>
+    </div>
+</article>
+				<article class="expandedview">
+	<div class="" data-bind="css: {'InStoreExpandedOffersContainer': offerType() == 'InStore', 'OnlineExpandedOffersContainer': offerType() == 'Online'}, attr: { id: 'expandedOffersList_'+offerType()+$index(), idx: offerType()+$index()}" style="display: none;">
+        <div class="momentDetailsContainer">
+            <a class="instoreOfferDetailLink" id="merchantLogoLinkIninstoreoffer" >
+				<img id="merchantlogo" data-bind="attr: {src: 'http://127.0.0.1:8087/moments/_assets/images/' + $root.getCategoryImage(category)}" class="momentImg"/>
+
+			</a>
+            <div class="momentDescContainer" id="momentDescContainerinInstoreoffer">
+            	<a class="instoreOfferDetailLink" id="offertitlelink" >
+                	<h1 id="merchantName" data-bind="text: merchantName"></h1>
+                </a>
+				<div id = "firstOfferTitle">
+				 <p id="momentTitle">
+    	                	<a class="instoreOfferDetailLink" id="offerDescriptionLink" data-bind="attr: { data_offerid: offers()[0].offer._id, id: offers()[0].offerType()+'momentTitle_'+$index(), href:'./offerdetails?offerId=' + offers()[0].offer._id + '&latitude=' + $root.getLat() + '&longitude=' + $root.getLon()}, text: offers()[0].offer.title"></a>
+    	         </p>
+                </div>
+				<div id="expandOffersdiv" >
+           			<div data-bind="foreach: {data: offers, afterRender: applyRatings}" class="ExpandedStackedOfferContainer" id="ExpandedStackedOfferContainer" >
+    	                <!-- ko if: $index()!= 0  -->
+						<p id="momentTitle" >
+    	                	<a class="instoreOfferDetailLink" id="offerDescriptionLink" data-bind="attr: { data_offerid: offer._id, id: offerType()+'momentTitle_'+$parentContext.$index()+'_'+$index(), href:'./offerdetails?offerId=' + offer._id + '&latitude=' + $root.getLat() + '&longitude=' + $root.getLon()}, text: offer.title"></a>
+    	                </p>
+						<!-- /ko -->
+    	                <div class="ratingAndDaysLeftContainer">
+    						<div class="ratingDistanceContainer">	
+    							<div class="ratingContainer bold">
+    	                            <div data-bind="attr: { data_rating: offer.average_rating, id: offerType()+'ratings_star_'+$parentContext.$index()+'_'+$index()}" class="ratings_star">
+    	            				</div>
+    	                            <div class="ratingLabel" data-bind="text: totalRatings, attr: {id: offerType()+'totalRatings_'+$parentContext.$index()+'_'+$index()}" class="rateNoInstoreOffers"></div>
+    	                        
+    								<div id="distanceDescContainerInExpandedView" class="distanceDescContainer" data-bind="visible: offerType() == 'InStore'">
+    									<div class="distanceIcon">
+    									</div>
+    									<div data-bind="text: distanceInMiles, attr: {id: offerType()+'distance_'+$parentContext.$index()+'_'+$index()}" class="distanceDesc"></div>
+    								</div>	
+    							</div>
+    						</div>
+    						<div data-bind="text: offerValidity, attr: {id: offerType()+'validity_'+$parentContext.$index()+'_'+$index()}, css: {'noOfDaysLeft': offerValidity() != null}" class="noOfDaysLeft noOfDaysLeftInInstoreList">
+    						</div>
+    						<div data-bind="text: offerStock, css: {'noOfDaysLeft': offerStock() != null}" class="stockLeft stockLeftInInstoreList">
+                           </div>
+    					<div class="seperatorExpandedview"></div>	
+    					</div>
+                		
+    	            </div>
+                </div>
+                
+            </div>
+           <div data-bind="attr: {idx: offerType()+$index()}" class="stackedstrip" id="expandedStrip" onclick="collapse(this)">
+                <div class="stackedtext"><label></label></div>
+           </div>
+		  
+				<div class="bluebottomstrip"></div>
+        </div>
+		
+    		<div class="dottedBorder">
+        	</div>	
+    </div>
+</article>           	</div>
+		</script> 
+  <script type="text/javascript">
+            var enterLocationDefault = "Enter Your Location";
+			$('#onlineNav').corner();
+			$('#momentSelectionContainerParentinCategoryFilter').corner();
+			$('#iPhoneSlider').corner();
+			$("#scrollbar1").tinyscrollbar();
+            $(function(){
+                $("#userLocation").watermark(enterLocationDefault);
+            });
+			var deviceCategory = "desktop";
+			var googleMapsClientId = "gme-telefonicauklimited";
+		</script> 
+  <script src="https://maps.googleapis.com/maps/api/js?client=gme-telefonicauklimited&amp;sensor=false">
+</script>  
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/jquery.watermark.min.js"></script> 
+  <script type="text/javascript" src="http://127.0.0.1:8087/moments/_assets/js/thirdparty/jquery.easing.1.3.min.js"></script> 
+  <script type="text/javascript">
+			   $('#morepopup').corner();
+			   $('.morepopupParent').corner();
+	    </script> 
+  <script type="text/javascript">
+		   var googleAnalyticsJsLocation = "http://127.0.0.1:8087/moments/_assets/js/thirdparty/ga.js";
+		   var milesAwayLabel= 'mi';
+		</script> 
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8087/moments/_assets/css/common.css" /> 
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8087/moments/_assets/css/jqueryui/jquery.ui.all.css" /> 
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8087/moments/_assets/css/desktop/offerdetails.css" /> 
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8087/moments/_assets/css/desktop/common.css" /> 
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8087/moments/_assets/css/desktop/desktopheader.css" /> 
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8087/moments/_assets/css/desktop/reportproblem.css" /> 
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8087/moments/_assets/css/desktop/termsandconditions.css" /> 
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8087/moments/_assets/css/desktop/error.css" /> 
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8087/moments/_assets/css/desktop/tablet.css" /> 
+  <!--[if lte IE 9]>
+		<link rel="stylesheet" type="text/css" href="http://127.0.0.1:8087/moments/_assets/css/desktop/ie9.css"/>
+		<![endif]--> 
+  <!--[if IE 8]>
+		<link rel="stylesheet" type="text/css" href="http://127.0.0.1:8087/moments/_assets/css/desktop/ie8.css"/>
+		<![endif]--> 
+ </head> 
+ <body> 
+  <noscript> 
+   <div class="wrapper disabledBgColor" id="cookieDisabled"> 
+    <header class="desktopHeader" id="desktopHeader"> 
+     <a href="#" class="o2Link"></a> 
+     <div class="priorityMomentContainer" id="pmHeader"></div> 
+     <a href="#" class="more visibilityhidden" id="morepopuplink">More</a> 
+    </header> 
+    <div class="cookieDisabledContainer"> 
+     <h3 class="headerText disabledPopupHeader">Javascript Alert</h3> 
+     <span class="messageContainer">You have Javascript turned off on your device. Please turn it on to have the best experience.</span> 
+     <a class="okLink buttonsBackgroundGradient" href="http://127.0.0.1:8087/moments/">OK</a> 
+    </div> 
+   </div> 
+   <style type="text/css">
+        #wrapperDiv {display:none;}
+    </style> 
+  </noscript> 
+  <div class="wrapper disabledBgColor desktop" id="cookieDisabled" style="display:none"> 
+   <div id="DesktopHeaderContainer"> 
+    <header class="desktopHeader" id="desktopHeader"> 
+     <a href="#" class="o2Link"></a> 
+     <div class="priorityMomentContainer" id="pmHeader"></div> 
+     <a href="#" class="more"></a> 
+    </header> 
+   </div> 
+   <div class="cookieDisabledContainer"> 
+    <h3 class="headerText disabledPopupHeader">Cookies Alert</h3> 
+    <span class="messageContainer">It seems cookies on this device are disabled! Please be aware that this site will not be accessible unless you enable cookies.</span> 
+    <a class="okLink buttonsBackgroundGradient" href="http://127.0.0.1:8087/moments/">OK</a> 
+   </div> 
+  </div> 
+  <div class="wrapper" id="wrapperDiv">  
+   <div id="staticHeader" class="staticHeader"> 
+    <div id="DesktopHeaderContainer"> 
+     <header class="desktopHeader" id="desktopHeader"> 
+      <a href="#" class="o2Link"></a> 
+      <div class="priorityMomentContainer" id="pmHeader"></div> 
+     </header> 
+     <div id="nevigationmenu"> 
+      <ul data-corner="top 7px" id="onlineNav" class="onlineNav"> 
+       <li id="allMomentsLinkContainer" class="inActiveLinkFromNav bold"> <a id="home" href="http://127.0.0.1:8087/moments/"> <i class="icon icon-allmoments"></i> ALL OFFERS </a> </li> 
+       <li id="savedOffersLinkContainer" class="inActiveLinkFromNav bold"> <a id="save" href="/moments/savedoffers?latitude=51.4139673&amp;longitude=-0.1966327"> <i class="icon icon-mymoments"></i> MY PRIORITY <label id="savedOffersCount"></label> </a> </li> 
+       <li id="searchLinkContainer" class="inActiveLinkFromNav bold"> <a id="search" href="/moments/searchoffers"> <i class="icon icon-search"></i> SEARCH </a> </li> 
+       <li id="moreContainer" class="inActiveLinkFromNav bold"> <a id="morepopuplink" href="#"> <i class="icon icon-more"></i> MORE </a> </li> 
+      </ul> 
+     </div> 
+    </div> 
+    <div id="commonTermsAndConditionpopupcontentDesktop" class="commonpopupContent termsandConditionsWrapper genericPopupContent" style="display:none"> 
+     <div class="closeContainer"> 
+      <a id="termsAndConditionCommonCloseDesktop" class="closebuttonDesktopTnc">Close</a> 
+     </div> 
+     <article class="termsandconditionGenericDesktop"> 
+      <h1 class="headerintermsCondition" id="headerintermsCondition">O2 Priority Terms &amp; Conditions</h1> 
+      <ul> 
+       <li><p>For the purpose of these terms and conditions &quot;We&quot;, &quot;Us&quot; and &quot;Our&quot; means Telef&oacute;nica UK Limited of 260 Bath Road, Slough, Berkshire SL1 4DX. &quot;You&quot;, or &quot;Your&quot; refers to You, the customer and user of the Priority service. By using the Priority app or registering for Priority, or applying for a Priority offer, You are deemed to have accepted these terms and conditions.</p></li> 
+       <li><p>Priority is a service brought to You by Us, and can be based on Your location and the information we hold. If you have downloaded the Priority app and wish to switch off location services, please change your settings on the app. If you have accessed Priority through your mobile browser, the location service may run independently to your GPS settings on your mobile. If you do not wish for location services to be used on your handset, you are advised not to use Priority through your mobile browser. </p></li> 
+       <li><p>Access to Priority is only open to users aged 16 years or over who have, downloaded the app, visited the mobile web pages, visited the Priority website at o2priority.co.uk/moments or registered to receive marketing communications from O2. Certain offers shall only be available to users aged 18 or over. You hereby warrant that all information submitted by You to Us is accurate and current. We reserve the right to verify the eligibility of users. </p></li> 
+       <li><p>You agree that the information supplied by You to Us may be used by O2 or our agents for the following purposes which shall include but are not limited to: sending Priority messages, monitoring the use of the service, and from time to time evaluating if we can improve the service for customers. Your information will be treated in accordance with O2's Privacy Policy, which can be viewed at <a target="_blank" href="http://www.o2.co.uk/termsandconditions/privacy-policy">http://www.o2.co.uk/termsandconditions/privacy-policy</a>.</p></li> 
+       <li><p>If You receive a message from Priority that offers You the opportunity to browse and or call to learn more, depending on the mobile tariff You are on, charges may apply. </p></li> 
+       <li><p>If You are roaming when You receive a message from Priority and You reply/call or browse, depending on the mobile tariff You are on, roaming charges may apply. </p></li> 
+       <li><p>We reserve the right to make any changes to the Priority service or to discontinue any aspect or feature of the service without notice to users. O2 may modify or withdraw Priority or elements of it (including charges for the service) at any time. If we change these terms to Your significant disadvantage we will notify You. </p></li> 
+       <li><p>We reserve the right to change these terms and conditions at any time. Your continued use of the Priority service will be deemed to have accepted the varied terms and conditions which will be posted on <a target="_blank" href="http://www.o2.co.uk/termsandconditions">http://www.o2.co.uk/termsandconditions</a>.</p></li> 
+       <li><p>Any use of the service by You is on an &quot;as is&quot; and an &quot;as available&quot; basis. You agree and accept that Priority is not a fault-free service and is for Your own personal use and shall not be used for commercial purposes. </p></li> 
+       <li><p>Any use of Priority is entirely at Your own risk and in no event shall we be liable for any indirect, incidental or consequential damages including without limitation loss of income, data or other information as a result of the use of Priority. </p></li> 
+       <li><p>Priority offers are subject to availability and may only be available while stocks last. We'll not be responsible if Your application for a Priority offer is incomplete, lost or not received.</p></li> 
+       <li><p>Links to third party websites and companies may appear on the service. Such third party websites are not the responsibility of O2 and We accept no responsibility for the availability, suitability, reliability or content of such third party websites. </p></li> 
+       <li><p>Components of Priority are supplied to Us by third parties and We cannot be held responsible for and do not accept any liability, either express or implied as to such components, including but not limited to their accuracy, relevance or quality. </p></li> 
+       <li><p>You acknowledge and agree that We are not responsible for the availability of any third party products and services or what You access through Priority. We shall not be held responsible or liable for any content, advertising, products or services available from such third parties. Any dealings between You and any third party advertisers or merchants found on or via Priority, including payment for and delivery of products, services and any other terms, conditions, warranties or representations associated with such dealings, are made between You and the relevant advertiser or merchant. Therefore, We are not responsible or liable for any loss or damage of any kind incurred as the result of any such dealings.</p></li> 
+       <li><p>O2 accepts no liability or responsibility for any of the third party bookings, products and services provided by third party suppliers. The third party suppliers will be supplying products and services to You on their own standard terms and conditions. Please note that third party offers may be withdrawn or amended at any time. </p></li> 
+       <li><p>Priority and features within Priority may also be protected by intellectual property rights belonging to O2, its licensors or to third parties. No licence is granted to You in respect of any such rights, except to the extent required for Your personal use of Priority in accordance with these terms and conditions. O2 and any other O2 product or service name are trade marks of O2 and You shall not be entitled to reproduce such marks without our prior written consent. </p></li> 
+       <li><p>These terms and conditions are governed by English Law and You and we submit to the non exclusive jurisdiction of the English Courts. </p></li> 
+       <li><p>The promoter is: Telef&oacute;nica UK Limited of 260 Bath Road, Slough, Berkshire SL1 4DX.</p></li> 
+      </ul> 
+     </article> 
+    </div> 
+    <div id="reportAProblemContentMorePopup" style="display:none" class="reportContainer genericPopupContent"> 
+     <script type="text/javascript">
+    $(function () {
+ 		$("#genericReportProblemName").watermark('Your name (optional)');
+		$("#genericReportProblemDesc").watermark('Details of the problem (optional)');
+	});
+</script> 
+     <article> 
+      <div id="reportProblemDesktopGenericDialog" class="linkContainerInReportProblem"> 
+       <a id="closeLinkReportProblemCategoryGeneric" class="closebutton">Close</a> 
+       <h1 id="reportproblem">Report a problem</h1> 
+       <span class="reportproblemMessage"> To help us look into your problem, please choose from one of the options below. </span> 
+       <div class="reportProblemContainer" id="reportProblemContainer"> 
+        <div class="reportProblemRight"> 
+         <a id="problemwithvoucher" class="issue">I have a different problem with my voucher</a> 
+        </div> 
+        <div class="reportProblemLeft"> 
+         <a id="conditionNotMet" class="issue dottedBorderRight">I have a problem with the site</a> 
+        </div> 
+       </div> 
+      </div> 
+      <div data-corner="7px" id="reportProblemNameAndDescGeneric" style="display:none"> 
+       <div class="closeContainer"> 
+        <a id="closeLinkReportProblemDesktopContentGeneric" class="closebutton">Close</a> 
+       </div> 
+       <h1>Tell us more</h1> 
+       <div class="reportWrapper"> 
+        <input id="genericReportProblemName" type="text" /> 
+        <textarea id="genericReportProblemDesc" rows="4" cols="50"></textarea> 
+        <a id="genericReportProblemSubmitDesktop" class="submitActive">Submit</a> 
+       </div> 
+      </div> 
+      <input type="hidden" id="typeOfIssue" />
+      <input type="hidden" id="offerTitle" value="" />
+      <input type="hidden" id="validAtDesc" value="" />
+      <input type="hidden" id="offerId" value="" />
+      <input type="hidden" id="merchantname" value="" />
+      <input type="hidden" id="msisdn" value="" /> 
+     </article> 
+    </div> 
+    <article class="linkContainer desktop"> 
+     <div class="momentSelectionOuterParent"> 
+      <div data-corner="4px" id="momentSelectionContainerParentinCategoryFilter" class="momentSelectionContainerParent"> 
+       <div id="inStoreBtn" data-bind="click: function(){showInstoreOffers(this)}" class="momentLink activeMomentLinkSliderHome">
+        IN STORE
+       </div> 
+       <div id="onlineBtn" data-bind="click: function(){showOnlineOffers(this)}" class="momentLink">
+        ONLINE
+       </div> 
+      </div> 
+     </div> 
+     <ul id="desktopcategories"> 
+      <li> <a class="catLink all clearfix" data-bind="{click: function() { updateViewByCategory(this, {}, true)}, css:{activeCategory: selectedCategory() == 'All Categories'}}" href="#"> <i class="icon"></i> <span class="title">All</span> <i class="activeArrow"></i> </a> </li> 
+      <!-- ko foreach: categories --> 
+      <!-- ko if: name != 'Music' --> 
+      <li> <a data-bind="{click: function(data) { $root.updateViewByCategory($root, data)}, attr:{'class': 'catLink clearfix ' + name.replace(/&amp;/g, '').replace(/ /g, '').toLowerCase()}, css:{activeCategory: $root.selectedCategory() == name} }" href="#"> <i class="icon"></i> <span class="title" data-bind="text: name"></span> <i class="activeArrow"></i> </a> </li> 
+      <!-- /ko --> 
+      <!-- /ko --> 
+     </ul> 
+    </article> 
+    <div id="locationContainer" class="locationContainer" style="display: none"> 
+     <input id="userLocation" data-bind="value: searchCriterion, valueUpdate: 'afterkeydown'" type="text" autocomplete="off" /> 
+     <div class="searchcloseicon" id="closeIcon" style="display: none"></div> 
+     <div id="addressContainer" data-bind="foreach: {data: locations}"> 
+      <div data-bind="click: function(data){$root.setUserLocation($root, data)}"> 
+       <a href="#address" class="addressLink" data-bind="text: address.formatted_address"></a> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div id="noAddressFound" class="noAddressFoundClass" style="display: none">
+     Your search didn't match any locations. Please try something different or check the spelling. 
+   </div> 
+   <div id="offerContainer" class="offerContainerOnListing"> 
+    <div id="mapAndPlaceholderContainer"> 
+     <div id="mapPlaceholder" style="display: none;">
+      <h1>TURN MAPS ON</h1>Click here to turn maps on.
+      <br />Data charges may apply.
+     </div> 
+     <img id="nearbyLocations" style="visibility:hidden;" /> 
+     <img id="nearbyLocationsTabletPortrait" style="display:none;" /> 
+    </div> 
+    <div id="loadingImage" style="display:none">
+     <div id="loadingImg"></div>
+    </div> 
+    <form name="momentForm" action=""> 
+     <input type="hidden" name="latitude" id="latitude" value="51.4139673" /> 
+     <input type="hidden" name="longitude" id="longitude" value="-0.1966327" /> 
+     <input type="hidden" name="offerId" id="offerId" value="" /> 
+    </form> 
+    <div id="scrollease" class="hidden"></div> 
+    <div id="instoreOffers" data-bind="template: { name: displayMode, foreach: inStoreMerchants }"></div> 
+    <div id="onlineOffers" data-bind="template: { name: displayMode, foreach: onlineMerchants }"></div> 
+    <div id="loading" style="display:none"> 
+     <img src="http://127.0.0.1:8087/moments/_assets/images/ajax-loader.gif" id="loadingImg" style="background:none" /> 
+     <div id="textLoading" class="loadingText">
+      Loading Offers...
+     </div> 
+    </div> 
+    <div id="noMoreInstoreOffersMessageContainer" class="noMoreInstoreOffersMessageContainerClass" style="display:none"> 
+     <div id="noMoreInstoreOffersMessage" class="noOffersMessage" data-bind="visible: instoreOffersPageNumber()==maxInstoreOffersPages() &amp;&amp; inStoreMerchants().length != 0">
+      All nearby offers shown
+     </div> 
+    </div> 
+    <div id="noMoreOnlineOffersMessageContainer" style="display:none"> 
+     <div id="noMoreOnlineOffersMessage" class="noOffersMessage" data-bind="visible: onlineOffersPageNumber() == maxOnlineOffersPages() &amp;&amp; onlineMerchants().length != 0">
+      All online offers shown
+     </div> 
+    </div> 
+    <div id="noInstoreOffersMessageContainer" style="display:none" class="noInstoreOffersMessageContainerClass"> 
+     <div id="noMoreInstoreOffersMessage" class="noOffersMessage" data-bind="visible: isInstoreOffersNotFound">
+      Offers not found for selected category
+     </div> 
+    </div> 
+    <div id="noOnlineOffersMessageContainer" style="display:none" class="noOnlineOffersMessageContainerClass"> 
+     <div id="noMoreInstoreOffersMessage" class="noOffersMessage" data-bind="visible: isOnlineOffersNotFound">
+      Offers not found for selected category
+     </div> 
+    </div> 
+   </div> 
+   <div id="loadingManualLocatedOffers" style="display:none"> 
+    <img src="http://127.0.0.1:8087/moments/_assets/images/ajax-loader.gif" id="loadingImg" style="background:none" /> 
+    <div id="textLoading" class="loadingText">
+     Loading Offers...
+    </div> 
+   </div> 
+   <div id="mapContainer" style="display: none;"> 
+    <div class="mapmenu"> 
+     <!--<button id="back">
+            Back        </button>--> 
+     <button id="recentre_btn"> </button> 
+    </div> 
+    <div id="nearbyLocationsIMap" class="nearbyLocationsIMapHighend" style="height: 33em;"> 
+    </div> 
+   </div>   
+   <section class="footersection"> 
+    <footer> 
+     <div class="desktopFooter"> 
+      <a href="http://www.telefonica.com" target="_blank" title="Telef&oacute;nica"> 
+       <div class="telefonicaImgContainer"></div> </a> 
+      <div id="copyright_name" class="copyrightContainer">
+        &copy; 2014 Telef&oacute;nica UK Limited 
+      </div> 
+     </div> 
+    </footer> 
+   </section> 
+  </div> 
+  <div id="locationDetectionFailDialog" class="ui-widget-content locationDisableOrFail genericPopupContent" style="display:none"> 
+   <span>Location detection is failed. Please enter location manually on All Offers page or reload.</span> 
+   <input type="button" id="locationDetTimeoutOk" value="OK" /> 
+  </div> 
+  <div id="locationDetectionDisabledDialog" class="ui-widget-content locationDisableOrFail genericPopupContent" style="display:none"> 
+   <span>Location detection is disabled or failed. Please enter location manually on All Offers page or reload.</span> 
+   <input type="button" id="locationDetFailedOk" value="OK" /> 
+  </div> 
+  <div class="hidden" id="mainTermsAndConditions"> 
+   <header id="priorityMomentsHeader"> 
+    <div class="priorityMomentContainer" id="pmHeader"></div> 
+   </header> 
+   <div class="backContainer"> 
+    <a id="backToMomentsFromTermsLink" href="#" class="visible">Back</a> 
+   </div> 
+   <div id="commonTermsAndConditionpopupcontentDesktop" class="commonpopupContent termsandConditionsWrapper genericPopupContent" style="display:none"> 
+    <div class="closeContainer"> 
+     <a id="termsAndConditionCommonCloseDesktop" class="closebuttonDesktopTnc">Close</a> 
+    </div> 
+    <article class="termsandconditionGenericDesktop"> 
+     <h1 class="headerintermsCondition" id="headerintermsCondition">O2 Priority Terms &amp; Conditions</h1> 
+     <ul> 
+      <li><p>For the purpose of these terms and conditions &quot;We&quot;, &quot;Us&quot; and &quot;Our&quot; means Telef&oacute;nica UK Limited of 260 Bath Road, Slough, Berkshire SL1 4DX. &quot;You&quot;, or &quot;Your&quot; refers to You, the customer and user of the Priority service. By using the Priority app or registering for Priority, or applying for a Priority offer, You are deemed to have accepted these terms and conditions.</p></li> 
+      <li><p>Priority is a service brought to You by Us, and can be based on Your location and the information we hold. If you have downloaded the Priority app and wish to switch off location services, please change your settings on the app. If you have accessed Priority through your mobile browser, the location service may run independently to your GPS settings on your mobile. If you do not wish for location services to be used on your handset, you are advised not to use Priority through your mobile browser. </p></li> 
+      <li><p>Access to Priority is only open to users aged 16 years or over who have, downloaded the app, visited the mobile web pages, visited the Priority website at o2priority.co.uk/moments or registered to receive marketing communications from O2. Certain offers shall only be available to users aged 18 or over. You hereby warrant that all information submitted by You to Us is accurate and current. We reserve the right to verify the eligibility of users. </p></li> 
+      <li><p>You agree that the information supplied by You to Us may be used by O2 or our agents for the following purposes which shall include but are not limited to: sending Priority messages, monitoring the use of the service, and from time to time evaluating if we can improve the service for customers. Your information will be treated in accordance with O2's Privacy Policy, which can be viewed at <a target="_blank" href="http://www.o2.co.uk/termsandconditions/privacy-policy">http://www.o2.co.uk/termsandconditions/privacy-policy</a>.</p></li> 
+      <li><p>If You receive a message from Priority that offers You the opportunity to browse and or call to learn more, depending on the mobile tariff You are on, charges may apply. </p></li> 
+      <li><p>If You are roaming when You receive a message from Priority and You reply/call or browse, depending on the mobile tariff You are on, roaming charges may apply. </p></li> 
+      <li><p>We reserve the right to make any changes to the Priority service or to discontinue any aspect or feature of the service without notice to users. O2 may modify or withdraw Priority or elements of it (including charges for the service) at any time. If we change these terms to Your significant disadvantage we will notify You. </p></li> 
+      <li><p>We reserve the right to change these terms and conditions at any time. Your continued use of the Priority service will be deemed to have accepted the varied terms and conditions which will be posted on <a target="_blank" href="http://www.o2.co.uk/termsandconditions">http://www.o2.co.uk/termsandconditions</a>.</p></li> 
+      <li><p>Any use of the service by You is on an &quot;as is&quot; and an &quot;as available&quot; basis. You agree and accept that Priority is not a fault-free service and is for Your own personal use and shall not be used for commercial purposes. </p></li> 
+      <li><p>Any use of Priority is entirely at Your own risk and in no event shall we be liable for any indirect, incidental or consequential damages including without limitation loss of income, data or other information as a result of the use of Priority. </p></li> 
+      <li><p>Priority offers are subject to availability and may only be available while stocks last. We'll not be responsible if Your application for a Priority offer is incomplete, lost or not received.</p></li> 
+      <li><p>Links to third party websites and companies may appear on the service. Such third party websites are not the responsibility of O2 and We accept no responsibility for the availability, suitability, reliability or content of such third party websites. </p></li> 
+      <li><p>Components of Priority are supplied to Us by third parties and We cannot be held responsible for and do not accept any liability, either express or implied as to such components, including but not limited to their accuracy, relevance or quality. </p></li> 
+      <li><p>You acknowledge and agree that We are not responsible for the availability of any third party products and services or what You access through Priority. We shall not be held responsible or liable for any content, advertising, products or services available from such third parties. Any dealings between You and any third party advertisers or merchants found on or via Priority, including payment for and delivery of products, services and any other terms, conditions, warranties or representations associated with such dealings, are made between You and the relevant advertiser or merchant. Therefore, We are not responsible or liable for any loss or damage of any kind incurred as the result of any such dealings.</p></li> 
+      <li><p>O2 accepts no liability or responsibility for any of the third party bookings, products and services provided by third party suppliers. The third party suppliers will be supplying products and services to You on their own standard terms and conditions. Please note that third party offers may be withdrawn or amended at any time. </p></li> 
+      <li><p>Priority and features within Priority may also be protected by intellectual property rights belonging to O2, its licensors or to third parties. No licence is granted to You in respect of any such rights, except to the extent required for Your personal use of Priority in accordance with these terms and conditions. O2 and any other O2 product or service name are trade marks of O2 and You shall not be entitled to reproduce such marks without our prior written consent. </p></li> 
+      <li><p>These terms and conditions are governed by English Law and You and we submit to the non exclusive jurisdiction of the English Courts. </p></li> 
+      <li><p>The promoter is: Telef&oacute;nica UK Limited of 260 Bath Road, Slough, Berkshire SL1 4DX.</p></li> 
+     </ul> 
+    </article> 
+   </div> 
+  </div> 
+  <div id="sitezeroratingpopupcontent" class="zeroratingpopupcontent" style="display:none"> 
+   <article> 
+    <p class="title" id="para_title_warning">Watch Out</p> 
+    <p id="para_expiry_label_warning" class="warningMessage">You're leaving Priority, data charges may apply.</p> 
+    <span class="closebutton closebuttonWatchOut" id="closebutton">Close</span> 
+    <div class="squaredFour squaredFourWatchOut"> 
+     <input type="checkbox" name="do_not_show_dialog_again" id="do_not_show_dialog_again" class="checkboxCellContainer checkboxUnClicked saveForLaterPopUpCheckbox" /> 
+     <label for="do_not_show_dialog_again"></label> 
+     <span class="checkboxtext">Don't show me this again</span> 
+    </div> 
+    <div class="loginsignupbuttoncontainer watchOutButtonContainer"> 
+     <input id="acceptZeroRatingWarning" class="buttonsBackgroundGradient" type="button" value="CONTINUE" /> 
+     <input id="goBackZeroRatingWarning" class="buttonsBackgroundGradient" type="button" value="GO BACK" /> 
+    </div> 
+   </article> 
+  </div> 
+  <div id="mapzeroratingpopupcontent" class="zeroratingpopupcontent genericPopupContent" style="display:none"> 
+   <article> 
+    <p class="title" id="para_title_warning">TURN MAPS ON</p> 
+    <p id="para_expiry_label_warning" class="warningMessage">You're about to turn on directions which uses maps and data charges may apply. You can turn directions back off at any time from the menu.</p> 
+    <span class="closebutton" id="closebutton">Close</span> 
+    <div class="centerAlignChilds"> 
+     <div class="checkboxInlineTableContainer" id="squaredFourInLogin"> 
+      <div id="doNotShowZeroRatingWarning" class="checkboxCellContainer checkboxUnClicked"></div> 
+      <div class="checkboxLabel ">
+       Got it, no need to remind me again. 
+      </div> 
+     </div> 
+    </div> 
+    <div class="loginsignupbuttoncontainer"> 
+     <input id="acceptZeroRatingWarning" class="buttonsBackgroundGradient" type="button" value="CONTINUE" /> 
+     <input id="goBackZeroRatingWarning" class="buttonsBackgroundGradient" type="button" value="GO BACK" /> 
+    </div> 
+   </article> 
+  </div> 
+  <div id="morepopup" class="genericPopupContent" data-corner="5px" style="display:none"> 
+   <a class="closebutton" id="closebutton">Close</a> 
+   <article> 
+    <span class="heading">O2 Priority</span> 
+    <div> 
+     <ul> 
+      <div class="dottedborder"></div> 
+      <li><a id="reportaproblemlink">Report a problem</a></li> 
+      <li><a id="reportaproblemlink" target="_blank" href="http://www.o2.co.uk/perks">More from O2</a></li> 
+      <div class="dottedborder"></div> 
+      <li><a id="commonTermsAndConditionsDesktop">Terms &amp; Conditions</a></li> 
+      <li><a id="cookiePolicyDesktop" target="_blank" href="http://www.o2.co.uk/cookie-policy">Cookie Policy</a></li> 
+      <div class="dottedborder"></div> 
+      <li><a id="reportaproblemlink" class="helpLink">Help</a></li> 
+      <li id="logoutButton" class="issue reportaproblem"> 
+       <form action="/moments/logout" method="post"> 
+        <input class="logoutButton" type="submit" id="logout" value="Logout" /> 
+       </form> </li> 
+     </ul> 
+    </div> 
+   </article> 
+  </div>  
+ </body>
+</html>

@@ -1,0 +1,1521 @@
+/*------Reset---------*/
+* {
+	margin: 0;
+	padding: 0;
+}
+html,body {
+	height: 100%;
+}
+html {
+	-webkit-text-size-adjust: none
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+fieldset,img {
+	border: 0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-style: 400;
+	font-weight: 400;
+}
+ol,ul {
+	list-style: none;
+}
+caption,th {
+	text-align: left;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size: 100%;
+	font-weight: 400;
+}
+q:before,q:after {
+	content: '';
+}
+abbr,acronym {
+	border: 0;
+}
+
+#inStoreBtn,#onlineBtn,#searchByLocation,#searchByMoment {
+	cursor:pointer;
+}
+a {
+	text-decoration: none;
+}
+body {
+	font-family: helvetica Neue, helvetica, arial;
+	background-color: #0B2154;
+}
+.bold, .backlinkHeader, .ui-dialog-content .popupContentBackLink, .searchMessage,.noOffersMessage{
+	font-weight: 700;
+}
+header,section,nav,ul,.onlineNav li,.linkContainer,.momentSelectionContainerParent,.momentDetailsContainerWrapper,.momentDetailsContainerParent,.momentDetailsContainer,.ratingContainer
+	{
+	overflow: hidden;
+}
+ul {
+	width: 100%;
+	}
+html {
+	-webkit-text-size-adjust: none;
+}
+/*----------Layout--------- */
+.wrapper {
+	width: 100%;
+	font-size: 1em;
+}
+
+.linkContainer {
+	background: url("../images/categoriesbgstripnew.png") repeat-x scroll 0
+		0 #E4E4E4;
+	color: #003151;
+	display: block;
+	font-size: .96em;
+	padding: 0;
+	border-bottom: 1px solid #CCC;
+	z-index: 10000;
+	width:96%;
+	margin:0 auto;
+	border-radius: 0;
+}
+.categoryContainer,.searchContainer {
+	font-size: .81em;
+	width: 50%;
+}
+.momentDetailsContainerWrapper {
+	background-color: #0c2254;
+}
+#morepopUp .dottedBorder, .reportContainer .dottedBorder {
+	margin: 0;
+}
+.dottedBorder {
+	background: url("../images/seperatordotted.png") repeat-x scroll 0 0;
+	height: 2px;
+	margin: 1.4% 0 0 0;
+}
+.momentDetailsContainerWrapper .dottedBorder{	
+	background-image:none;
+	border-bottom:1px dotted #7d7d7d;	
+	display:none;
+}
+/*----------content------- */
+.o2logo {
+	background: url("../images/o2logo.png") no-repeat scroll 0 0;
+	background-size: 100% auto;
+	display: inline-block;
+	margin: 2.5% 8% 1% 0;
+	padding: 0 2.5% 8%;
+	width: 2%;
+}
+#mainTermsAndConditions .priorityMomentContainer {
+	margin: .7% 0 0 33% !important;
+}
+
+.backlinkHeader, .ui-dialog-content .popupContentBackLink, .priorityMomentContainer, .categoryContainer label, .allCategorys, .allCategoryActive, .momentSelectionContainerParent,
+ .momentLink,.momentDetailsContainer a,.momentImg,.momentDescContainer, .daysleftContainer .clockContainer,.momentDescContainer .merchantNameInSavedOffer, 
+ .daysleftContainer span, .rating, .ratings_star, .searchicon,.categories a, span.bullet, #distanceInMilesInner,
+  #milesMessage, #userLocation, .searchtext, .categoryContainer, .searchContainer, .o2logo { 
+	float: left;
+	clear: none;
+}
+.backlinkHeader,.ui-dialog-content .popupContentBackLink{
+	background: url("../images/backbtnwhite.png")  no-repeat;
+	color: #FFF;
+	cursor: pointer;
+	display: inline-block;
+	overflow: hidden;
+	background-size: 6px 9px;
+}
+.ui-dialog-content .popupContentBackLink{
+	font-size: 1em;
+	padding: 0 0.8em;
+	background-position: 0px 3px;	
+	margin-left:2.8%;
+}
+.backlinkHeader{
+	background-color: transparent;
+	font-size: 1.12em;
+	padding: 0 3%;
+	position: relative;
+	text-align: right;
+	left: 0.8em;
+	background-position: 0px 3px;
+}
+
+#noMoreInstoreOffersMessage ,#noMoreOnlineOffersMessage, .categoryContainer label, .momentLink, .offerDescInReportProblem, .reportContainer h1, .noAddressFoundClass,
+.offerNotAvailableMessage , #loading, #loadingImage, #loadingManualLocatedOffers{
+	text-align: center;	
+}
+
+.categoryContainer label {
+     font-size: 1.2em;
+     margin: 8.2% .5% 7.5% 4%;
+  }
+.allCategory {
+    background: url("../images/categoriesarrow.png") no-repeat;
+    color: #003151;
+    display: inline-block;
+    font-size: 1.2em;
+    margin: 3.7% 0 0 3%;
+    padding: 5% 1% 5% 0;
+    background-position: 87% -23px;
+    width: 66%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    outline: none;
+    
+}
+.allCategoryActive {
+	color: #003151;
+	display: inline-block;
+	font-size: 1.2em;
+}
+.momentSelectionContainerParent {
+	background: url("../images/momentselectioncontainer.png") repeat-x #90A6B4;
+	background-size: auto 100%;
+	border-radius: 2px;
+	padding: .5% .7% 0 .7%;
+	width: 93%;
+	margin: 1.9% 1.1% 1.9% 2.9%;
+}
+.linkContainer .momentLink{
+	font-weight: 700;
+	display: inline-block;
+	padding: 4% 0 3.8% 0; 
+}
+.momentLink {
+	border-radius: 5px;
+	color: #7e7e7e;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	}
+.activeMomentLinkSlider {
+	color: #FFF;
+	font-size: .95em;
+	position:relative;
+	z-index:2;
+}
+.iPhoneSliderContainer{
+	position:relative;
+	margin: 2% 0 0 2%;
+}
+.iPhoneSlider {	
+	-webkit-user-drag:none !important;
+    -webkit-touch-callout: none !important;
+    -webkit-select:none !important;
+	position: absolute;
+	top:0px;
+    width:49%;
+    padding:10% 0 8.5%;
+    z-index: 0;
+    border-radius:2px;
+}
+
+#categoryMenu .categoryLink {
+    position: relative;
+    width: 31%;
+    height: auto;
+    background-size: 100% 100%;
+}
+
+.categoryLink span {
+    margin:-2em 0 0 0;
+}
+
+.svg #categoryMenu .categoryLink.allcategories.activeCategory { background-image: url("../images/allcategories.svg"); }
+.svg #categoryMenu .categoryLink.travel.activeCategory { background-image: url("../images/travel.svg"); }
+.svg #categoryMenu .categoryLink.entertainment.activeCategory { background-image: url("../images/entertainment.svg"); }
+.svg #categoryMenu .categoryLink.shopping.activeCategory { background-image: url("../images/shopping.svg"); }
+.svg #categoryMenu .categoryLink.fooddrink.activeCategory { background-image: url("../images/fooddrink.svg"); }
+.svg #categoryMenu .categoryLink.healthbeauty.activeCategory { background-image: url("../images/healthbeauty.svg"); }
+.svg #categoryMenu .categoryLink.sports.activeCategory { background-image: url("../images/sports.svg"); }
+.svg #categoryMenu .categoryLink.tickets.activeCategory { background-image: url("../images/tickets.svg"); }
+
+.svg #categoryMenu .categoryLink.allcategories { background-image: url("../images/allcategoriesactive.svg"); }
+.svg #categoryMenu .categoryLink.travel { background-image: url("../images/travelactive.svg"); }
+.svg #categoryMenu .categoryLink.entertainment { background-image: url("../images/entertainmentactive.svg"); }
+.svg #categoryMenu .categoryLink.shopping { background-image: url("../images/shoppingactive.svg"); }
+.svg #categoryMenu .categoryLink.fooddrink { background-image: url("../images/fooddrinkactive.svg"); }
+.svg #categoryMenu .categoryLink.healthbeauty { background-image: url("../images/healthbeautyactive.svg"); }
+.svg #categoryMenu .categoryLink.sports { background-image: url("../images/sportsactive.svg"); }
+.svg #categoryMenu .categoryLink.tickets { background-image: url("../images/ticketsactive.svg"); }
+
+#categoryMenu .categoryLink.allcategories.activeCategory { background-image: url("../images/allcategories.png"); }
+#categoryMenu .categoryLink.travel.activeCategory { background-image: url("../images/travel.png"); }
+#categoryMenu .categoryLink.entertainment.activeCategory { background-image: url("../images/entertainment.png"); }
+#categoryMenu .categoryLink.shopping.activeCategory { background-image: url("../images/shopping.png"); }
+#categoryMenu .categoryLink.fooddrink.activeCategory { background-image: url("../images/fooddrink.png"); }
+#categoryMenu .categoryLink.healthbeauty.activeCategory { background-image: url("../images/healthbeauty.png"); }
+#categoryMenu .categoryLink.sports.activeCategory { background-image: url("../images/sports.png"); }
+#categoryMenu .categoryLink.tickets.activeCategory { background-image: url("../images/tickets.png"); }
+
+#categoryMenu .categoryLink.allcategories { background-image: url("../images/allcategoriesactive.png"); }
+#categoryMenu .categoryLink.travel { background-image: url("../images/travelactive.png"); }
+#categoryMenu .categoryLink.entertainment { background-image: url("../images/entertainmentactive.png"); }
+#categoryMenu .categoryLink.shopping { background-image: url("../images/shoppingactive.png"); }
+#categoryMenu .categoryLink.fooddrink { background-image: url("../images/fooddrinkactive.png"); }
+#categoryMenu .categoryLink.healthbeauty { background-image: url("../images/healthbeautyactive.png"); }
+#categoryMenu .categoryLink.sports { background-image: url("../images/sportsactive.png"); }
+#categoryMenu .categoryLink.tickets { background-image: url("../images/ticketsactive.png"); }
+
+.momentDetailsContainerParent {
+	border-bottom: 1px dotted #ccc;
+	padding-bottom: 2%;
+}
+.momentDetailsContainer a {
+	display: inline-block;
+	width: 31%;
+}
+.momentDetailsContainer #merchantLogoLinkIninstoreoffer {
+	width: 32%;
+	margin-top: -.2%;
+	min-height: 1px;
+}
+.momentImg {
+	display: inline-block;
+    border-top-left-radius: 5px;
+	width: 105%;
+	background-repeat: no-repeat;
+}
+#bubbleGradient {
+	background: url("../images/bubblegradient.png") repeat-x;
+}
+#bubbleArrow {
+	background-image: url("../images/bubblearrow.png");
+	background-repeat: no-repeat;
+	background-size: 80% auto;
+	bottom: -19px;
+	height: 19px;
+	left: 111px;
+	position: absolute;
+	width: 19% !important;
+}
+#contentIcon {
+	background-image: url("../images/bubbleicon.png");
+	background-repeat: no-repeat;
+}
+#close {
+	background-image: url("../images/bubbleclose.png");
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	bottom: 31px;
+	color: #FFF;
+	margin-left: 78%;
+	padding: 0 0 13%;
+	position: relative;
+	width: 23%;
+}
+.momentDescContainer {
+	margin-left: 4.9%;
+	margin-top: 1.2%;
+	position: relative;
+	width: 64%;
+	line-height: 1.4em;
+}
+#momentDescContainerinInstoreoffer {
+	margin-left: 3.9%;
+	margin-top: 4.5%
+}
+.momentDescContainer h1 {
+	font-size: 1.3em;
+	color: #7F7F7F;
+	font-weight: 700;
+	overflow: hidden;
+	width: 90%;
+	padding-bottom: 1.7%;
+}
+.savedarticlewrapper .momentDescContainer h1 {
+	font-size: 1.19em;
+	width: 95%;
+}
+#mapPlaceholder {
+    height: 7em;
+    padding: 2% 10% 0% 10%;
+    display: block;
+    color: #fff;
+    text-align: center;
+    background: url('../images/mapplaceholder.png') no-repeat top left;
+    background-size: 100% 100%;
+    line-height: 2em;
+    font-size: 1.05em;
+}
+#mapPlaceholder h1 {
+    font-weight: 700;
+}
+.merchantImages #mapPlaceholder {
+    border: 0;
+    width: auto;
+    margin:0;
+}
+.mapContainer #nearbyLocations{
+	width: 96% !important;
+	margin: 0 1.8% 0 1.8%;
+    border : 1px solid transparent;
+}
+.momentDescContainer .merchantNameInSavedOffer {
+	font-size: .9em;
+	width: 55%;
+}
+.daysleftContainer {
+	width: 50%;
+	margin: -2% 0 0 0;
+	float: right;
+	clear: none;
+}
+.daysleftContainer .clockContainer {
+	background: url("../images/clock.png") no-repeat scroll 0 0;
+	width: 16%;
+	padding: 10% 0;
+	background-size: 100% auto;
+}
+.daysleftContainer span {
+	padding: 0;
+	color: #7F7F7F;
+	font-weight: bold;
+	margin: 0%;
+	font-size: .9em;
+	padding-left:3%;
+}
+.momentDescContainer p {
+	color: #4B4B4B;
+	display: block;
+	font-size: 1.13em;
+	width: 84%;
+	line-height: 1.1em;
+	font-weight: 700;
+	clear: both;
+}
+#walletvoucherwrapperNotExpired p,.walletvoucherExpired  p {
+	width: 95%;
+	padding-top: 3%;
+}
+.walletvoucherExpired .momentDescContainer p {
+	margin-top: 1%;
+	width: 95%;
+	font-size: 1.05em;
+}
+.rating {
+	font-size: .8em;
+	margin: .9% 1.4% 0 0;
+	padding: 0 0 5%;
+	width: 5.5%;
+}
+.ratingContainer label {
+	bottom: 1px;
+	color: #7A7A7A;
+	font-size: .9em;
+	position: absolute;
+	top: .95em;
+	left: 6.8em;
+}
+.ratingContainer .rateNoInstoreOffers {
+	bottom: 1px;
+	color: #7A7A7A;
+	font-size: .929em;
+	left: 6.8em;
+	position: absolute;
+	top: 1.13em;
+	font-weight: 700;
+}
+#active,#inactive {
+	background: url("../images/activestar.png")  no-repeat;
+	background-size: 100% auto;
+}
+#inactive {
+	background-image: url("../images/inactive.png");
+}
+.ratings_star_instoreOffers {
+	width: 73% !important;
+}
+.ratings_star_instoreOffers img {
+	width: 14.9%;
+}
+.ratingDistanceContainer {
+	margin: 1.5% 0 0;
+	overflow: hidden;
+	width: 100%;
+	color: #4B4B4B;
+}
+
+.distanceIcon { 
+	background-image: url("../images/distanceicon.png");
+	background-repeat: no-repeat;
+	background-size: 0.9em auto;
+	padding: 0 0 14%;
+	width: 13%;
+	background-position: 0 19%;
+}
+.distanceDesc {
+	color: #7A7A7A;
+	font-weight: 700;
+	position: static !important;
+}
+
+.noOfDaysLeftIninstoreOffer {
+	color: #7A7A7A;
+	font-weight: 700;
+	overflow: hidden;
+	position: absolute;
+	top: .49em;
+	padding: 3.9% 0 0 0;
+	font-size: .9em;
+}
+#offertitlelink {
+	display: block;
+	width: 100%;
+}
+#offerDescriptionLink {
+	color: #4B4B4B;
+	display: block;
+	width: 100%;
+}
+.ratingAndDaysLeftContainer {
+	clear: both;
+	display: block;
+	position: relative;
+	min-height: 2em;
+}
+.searchtext {
+	background-size: 5.4% auto;
+	line-height: 1em;
+	border: none;
+	padding: 3.4% 0;
+	text-indent: 3%;
+	width: 94%;
+	color: #0C2459;
+	font-family: helvetica Neue, helvetica, arial;
+	font-size: 1.2em;
+	font-weight: 700;
+	outline: none;
+}
+.searchInnerContainer input {
+	background-color: transparent;
+}
+.searchicon {
+	background: url("../images/searchicon.png") no-repeat scroll 5% center
+		transparent;
+	width: 5.7%;
+	height: 1.6em;
+	background-size: 100%;
+	top: 1.9em;
+	left: 1.8em;
+	margin-top: 3%;
+	margin-left: 5%;
+}
+.searchContainer {
+	padding-bottom: 2.5%;
+}
+.momentLocationWrapper {
+	overflow: hidden;
+}
+.hidden {
+	display: none;
+}
+.invisible {
+	visibility: hidden;
+}
+.visible {
+	visibility: visible;
+}
+
+/*for categories criteria*/
+#categoryfilter {
+	clear: both;
+}
+.categories {
+	overflow: hidden;
+	padding: 0 0% 3% 0%;
+	background-color: #F6F6F6;
+	width: 96%;
+	margin: 0 0 0 2%;
+	height:auto;
+}
+.categories  a {
+	display: block;
+	margin: 2.2% 0% 0.5em 2%;
+	width: 31%;
+	border-radius:2px;
+	box-shadow: 0px -1px 2px #ccc;
+}
+.categoryLink img {
+	display: block;
+    width: 100%;
+    padding-bottom: 6px;
+}
+.categories a span {
+	color: #003151;
+	font-size: .909em;
+	text-shadow: 1px -1.3px 4px #5A5A5A;
+	display: block;
+	padding: 0;
+	text-transform: uppercase;
+    width: 100%;
+    position: relative;
+    bottom: 0.6em;
+}
+.categories label {
+	display: block;
+	color: #003151;
+	font-weight: 700;
+	font-size: .95em;
+	margin: 1.1em 0 .2em 0.9em;
+}
+.momentSelectionOuterParent {
+	overflow: hidden;
+	width: 49.5%;
+	border-left: none;
+}
+#momentSelectionOuterParentInSearch {
+	padding: .6% 0;
+}
+.categoryLink.activeCategory {
+}
+.categoryLink.activeCategory span {
+	color: #fff;
+	display: block;
+}
+#recentre_btn {
+	background: url('../images/relocate.png') no-repeat scroll center center
+	 transparent;
+	border: 0 none;
+	padding: 26px 25px;
+	float: right;
+	border-left: 1px solid #B0ACA5;
+	cursor: pointer;
+	background-size: 36%;
+	height: 4em;
+	width: 5%;
+}
+/*for interactive map*/
+.mapmenu {
+	border-bottom: 1px solid #B0ACA5;
+	overflow: hidden;
+	width: 96%;
+	margin: 0 0 0 2%;
+	border-radius: 4px 4px 0 0;
+	top:3.8em;
+	z-index: 100;
+	background-color: #fff;
+}
+.mapmenu #back {
+	background: url('../images/backbtn.png') no-repeat scroll left 50%
+		transparent;
+	border: 0 none;
+	padding-left: 3%;
+	margin-top: 4.5%;
+	margin-left: 3%;
+	font-weight: 700;
+	font-size: .9em;
+	cursor: pointer;
+	color: #7A7A7A;
+	background-size: 17%;
+}
+/*for stacked offers*/
+.bulletedlist {
+	display: block;
+	overflow: hidden;
+	height: 7em;
+	padding-top: 2%;
+}
+.bulletedlist li #offerDescriptionLink {
+	margin-top: 1%;
+}
+span.bullet {
+	background: url('../images/bullet.png') no-repeat scroll left 5%
+		transparent;
+	display: block;
+	background-size: 100%;
+	padding: 1.3%;
+	vertical-align: middle;
+	margin-top: 2.5%;
+	display: none;
+}
+span.bulletedtext {
+	padding-left: 2%;
+	font-weight: 700;
+	font-size: 1.13em;
+	font-family: helvetica Neue bold, helvetica, arial;
+	float: left;
+	width: 81%;
+	display: block;
+	line-height: 1.1em;
+}
+.stackedstrip {
+	position: absolute;
+	display: block;
+	width: 10.6%;
+	top: -20%;
+	left: 86.1%;
+	height: 9.6em;
+	background-size: 100% 4%;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.stackedarrow {
+	background-color: #41A3D3;
+	background-size: 100% 100%;
+	height: 12em;
+	position: relative;
+	bottom: 7%;
+}
+
+.expandedview .momentDetailsContainer {
+	background: #fff;
+}
+.seperatorExpandedview {
+	height: .05em;
+	background-color: #d7d6d6;
+	display: block;
+	width: 110%;
+	margin-top: 3%;
+}
+.offerDetailLink {
+	min-height: 1px;
+}
+#momentTitle .offerDetailLink,#momentTitle .instoreOfferDetailLink {
+	color: #4c4c49;
+	width: 100%;
+	display: block;
+	margin: 3% 0 5% 0;
+}
+.expandedview .stackedstrip {
+	position: absolute;
+	display: block;
+	width: 7%;
+	left: 91%;
+	top: -.2%;
+	height: 0;
+	visibility: hidden;
+}
+.expandedview .stackedtext {
+	background: url('../images/ribbontop.png') no-repeat scroll top center
+		transparent;
+	background-size: 100% auto;
+	display: block;
+	position: relative;
+	top: 0;
+	color: red;
+	z-index: 100;
+	left: -3%;
+	height: 2.4em;
+	width: 108%;
+	visibility: visible;
+}
+.expandedview .momentDetailsContainer {
+	position: relative;
+}
+.expandedview .stackedtext label {
+	background: url('../images/cancelwhite.png') no-repeat scroll top center
+		transparent;
+	width: 35%;
+	height: 1em;
+	margin: 0 auto;
+	background-size: 100%;
+}
+.stackedview .momentDetailsContainer {
+	background: url('../images/stackedvoucherbottom.png') repeat-x scroll
+		center bottom #fff;
+	background-size: .4%;
+	padding-bottom: .2em;
+}
+.stackedview #momentDescContainerinInstoreoffer {
+	margin-top: 1.3%;
+}
+.bluebottomstrip {
+	width: 6.4%;
+	height: .35em;
+	background-color: #0087AE;
+	position: absolute;
+	bottom: 0;
+	right: 2.6%;
+	clear: both;
+}
+.expandedview #offertitlelink {
+	width: 87%;
+	margin-top: -.8%;
+}
+.expandedview .noOfDaysLeft {
+	top: 8%;
+}
+.reportContainer {
+	width: 100%;
+}
+.reportContainer .reportproblemMessage{
+	width: 78%;
+	font-size: 1.13em;
+}
+.reportproblemMessage {   
+	padding: 0 0 2em 0;
+	display: block;
+	color: #4C4C4C;
+	font-weight: 700;
+	margin: auto;
+	text-align: center;
+	line-height: 1.4em;
+}
+.offerDescInReportProblem {
+	display: block;
+	color: #4c4c4c;
+	font-weight: 700;
+	margin: auto;
+	font-size: 1em;
+	padding: 0 0 .5em 0;
+	width: 80%;
+}
+.reportProblemSubmit{
+	width: 86.9%;
+	display: inline-block;
+	padding: 1em 0;
+	margin: 1.2em 0 2em 1.7em;
+	text-align: center;
+	border-radius: 2px;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 1.2em;
+	color: #fff;
+}
+.submitActive {	
+	background: #1a418f;
+    background: -moz-linear-gradient(top,  #3a5c9f 0%, #3a5c9f 50%, #1a418f 50%, #1a418f 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3a5c9f), color-stop(50%,#3a5c9f), color-stop(50%,#1a418f), color-stop(100%,#1a418f)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #3a5c9f 0%,#3a5c9f 50%,#1a418f 50%,#1a418f 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #3a5c9f 0%,#3a5c9f 50%,#1a418f 50%,#1a418f 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #3a5c9f 0%,#3a5c9f 50%,#1a418f 50%,#1a418f 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #3a5c9f 0%,#3a5c9f 50%,#1a418f 50%,#1a418f 100%); /* W3C */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+	text-shadow: 1px -1px 1px #777;
+}
+.reportContainer h1 {  /*desktop*/
+	color: #003151;
+	font-size: 1.2em;
+	font-weight: 700;
+	padding: 5.3% 0 3%;
+	font-family: verdana;
+	letter-spacing: -1px;
+}
+.linkContainerInReportProblem {
+	padding-bottom: 22%;
+}
+.linkContainerInReportProblem a {  /*desktop*/
+	background: url("../images/linkarrowinreportproblem.png") no-repeat scroll 93.6% 47% transparent;
+	background-size: .6em .9em;
+	display: inline-block;
+	color: #003151 !important;
+	width: 99%;
+	font-size: 1.09em;
+	font-weight: 700;
+	padding: 6% 0 7% 3.2%;
+	text-transform: uppercase;
+	font-family: verdana;
+
+}
+.reportContainer {
+	padding: 0;
+	background-color: #f6f6f6;
+}
+.reportContainer a {
+	color: #FFF;
+}
+.ratingPopupContainer,.savePopupContainer {
+	top: 0 !important;
+}
+#addressContainer .addressLink {
+	display: block;
+	padding: 6% 4% 6% 4%;
+	color: #0C2459;
+	font-size: 1.13em;
+	border-bottom: 1.4px dotted #ccc;
+	font-weight: 700;
+	color: #7F7F7F;
+}
+.noAddressFoundClass, .offerNotAvailableMessage {
+	color: #fff;
+	padding: 5% 0 0 0;
+	margin: 0 auto 0 auto;
+	font-weight: 700;
+	line-height: 1.6em;
+	display: block;
+}
+.offerdetailsIntermsCondition {
+	color: #494949;
+}
+.termsStyle {
+	padding: 4em 2.5% 0 6%;
+	background-color: #f6f6f6;
+	width: 87%;
+	margin: auto;
+}
+.rulesContainer {
+	padding-bottom: 2.2em;
+}
+.offerdetailsIntermsCondition h1,.termsContainer h1{
+	font-size: 1.2em;	
+}
+.offerdetailsIntermsCondition h1,.termsContainer h1,.commonTermsAndCondition h1
+	{
+	font-weight: bold;
+	color: #494949;
+	padding: 6% 0 0 0;
+}
+.offerdetailsIntermsCondition span,.termsContainer span {
+	font-size: 1.13em;
+	display: block;
+	color: #494949;
+}
+/*rating desktop */
+.wrapper section {
+	position: relative;
+}
+.bg {
+	position: absolute;
+	top: 0;
+	z-index: 999;
+	background: #ccc;
+	width: 100%;
+	opacity: .5;
+	height: 100%;
+	display: none;
+}
+
+/*report a problem */
+#desktop-reportProblemDialog .linkContainerInReportProblem a.issue {
+	width: 48%;
+	float: left;
+	padding: 25px 0 25px 2%;
+	margin: 0;
+	border: 1px dotted;
+	margin-left: -1px;
+	position: relative;
+	border-bottom: 0;
+	border-right: 0;
+	background: #EFEFEF;
+}
+.issue{
+	 cursor: pointer;
+}
+/*search location*/
+.nearByInstoreOffers .savedlistButtonsContainer {
+	display: none;
+}
+#emailError,.errorMessageInLogin {
+	padding-top: 2%;
+	padding-bottom: 2%;
+	color: red;
+	font-size: 1.2em;
+	width: 93%;
+}
+.errorMessageInLogin {
+	padding-left: 6%;
+}
+#loading, #loadingManualLocatedOffers {
+    border-radius: 3px;
+    padding: 4px;
+}
+#loading, #loadingImage, #loadingManualLocatedOffers {
+	display: block;
+	position: fixed;
+	top: 19em;
+	left: 37%;
+	font-weight:700;
+}
+#loading img, #loadingImage, #loadingManualLocatedOffers img{
+	border-radius: 3px;
+}
+.home#loading #loadingImg, .home#loadingManualLocatedOffers #loadingImg {
+    height: 24px;
+    background: url('../images/ajax-loader-on-blue.gif') no-repeat top center;
+}
+#staticHeader {
+	position: fixed;
+	top: 0;
+	z-index: 200;
+	background-color: #0B2154;
+}
+#voucherCodeSpan, #voucherCodeSpan * {
+	color: #fff !important;
+}
+.headerImageContainer {
+	overflow: hidden;
+}
+#offerContainer {
+	width: 100%;
+}
+#mapContainer{
+	background-color:#0C2254;
+}
+#popupPanel-popup {
+	right: 0 !important;
+	left: auto !important;
+}
+.searchInnerContainer {
+	margin: 5% auto auto;
+	overflow: hidden;
+	width: 93%;
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: -moz-linear-gradient(top, #fff 0%, #fdfdfd 49%, #f2f2f2 100%);
+	/* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff),
+		color-stop(49%, #fdfdfd), color-stop(100%, #f2f2f2) );
+	/* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #fff 0%, #fdfdfd 49%, #f2f2f2 100%);
+	/* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #fff 0%, #fdfdfd 49%, #f2f2f2 100%);
+	/* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #fff 0%, #fdfdfd 49%, #f2f2f2 100%);
+	/* IE10+ */
+	background: linear-gradient(to bottom, #fff 0%, #fdfdfd 49%, #f2f2f2 100%);
+	/* W3C */
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid #9E9E9E;
+	border-top: 2px solid #9E9E9E;
+}
+.savedarticlewrapper .walletvoucher,#walletvoucherwrapperExpired {
+	height: 9.55em;
+}
+.savedarticlewrapper .daysleftContainer {
+	position: absolute;
+	left: 7em;
+	top: 6em;
+}
+.offercontainerOnOverlay {
+	margin-top: 0 !important;
+}
+.activeAllCategory {
+	background-image: url("../images/categoriesarrow.png");
+}
+.headerStripesImg,.headerStripesImgActive{
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	background: url("../images/headerstripsprite.png") no-repeat transparent;
+}
+
+.headerStripesImg {
+	background-position: 2px 0px;
+	background-size: 202% 100%;
+	margin-right: 8%;
+	padding-bottom: 35%;
+	width: 33%;
+	float:right;
+	
+}
+.headerStripesImgActive {	
+	background-position:100% 50%;
+	padding-bottom: 40%;
+	width: 45%;
+	float: right;
+	background-size: 200%;
+}
+.redColorForErrorWatermark::-webkit-input-placeholder {
+	color: red !important;
+}
+.greyColorForErrorWatermark::-webkit-input-placeholder {
+	color: rgb(169, 169, 169) !important;
+}
+
+#error {
+	color: red;
+	padding: 2% 0 0 6.4%;
+	display: block;
+	font-size: 1.2em;
+}
+
+.iconloading {
+	background-image: url("../images/ajax-loader-on-blue.gif");
+	background-position: center center;
+	background-repeat: no-repeat;
+	float: right;
+	position: relative;
+    background-size: 90% auto;
+    margin-right: 0.7%;
+    padding-bottom: 4%;
+    top: 0.2em;
+    width: 3%
+}
+#locationInnerContainer .iconloading {
+	background-image: url("../images/ajax-loader.gif");
+	background-position: center center;
+	background-repeat: no-repeat;
+	float: right;
+	padding-bottom: 10%;
+	position: relative;
+	top: .3em;
+	width: 8%;
+	background-size: 100% auto;
+	margin-right: 1.7%;
+}
+#milesMessage {
+	margin-left: 3%;
+	height: 1.1em;
+	margin-top: 5%;
+	width: 5%;
+}
+
+#distanceInMiles #milesMessage {
+	margin-top: -2%;
+}
+#ratingAndDaysLeftContainerInInstoreListing {
+	clear: both;
+	display: block;
+	position: absolute;
+	min-height: 2em;
+	float: right;
+	width: 65%;
+	bottom: -.7em;
+	right: -.2em;
+}
+#ratingAndDaysLeftContainerInInstoreListing .ratingContainer label {
+	top: -.2em;
+}
+#ratingAndDaysLeftContainerInInstoreListing .distanceDescContainer {
+	top: -.15em;
+	right: 0;
+	margin: 0;
+	clear: both;
+}
+#ratingAndDaysLeftContainerInInstoreListing .noOfDaysLeftInInstoreList {
+	left: 10em;
+	position: absolute;
+	top: -5%;
+	padding: 0% 0 0 6.5%;
+	font-size: .89em;
+	background-size:1.1em;
+	background-position:left 45%;
+}
+
+#momentDescContainerInList h1 ,.expandViewLink h1 ,#linkandDesContainerInSearch h1 {
+	margin-top: 2%;
+}
+.expandedview h1 {
+	margin-top: -2.5%;
+}
+
+#momentDescContainerInSearch {
+	margin-bottom: 2%;
+}
+
+#offerSecondaryDetails #distanceInMiles {
+	top: .2em;
+}
+#offerSecondaryDetails #distanceInMilesInner {
+	margin-top: -2%;
+}
+#offerSecondaryDetails #offersRemaining {
+	font-size: .9em;
+	font-weight: 700;
+	color: #797979;
+	width: auto;
+	margin-right: 0;
+	position: absolute;
+	left: 11.7em;
+}
+#feedbackContainer {
+	text-align: center;
+	color: #7F7F7F;
+}
+#feedbackContainer p {
+	font-size: 0.99em;
+}
+.ratingPopupContainer #feedbackContainer textarea {
+	border: 1px solid #ccc;
+    height: 7em;
+    padding: 2%;
+    resize: none;
+}
+#daysleftContainerinsaved {
+	position: absolute;
+	left: 20em;
+	top: 1.6em;
+}
+#daysleftContainerinsaved span {
+	color: #FFF;
+	margin: 1% 0 0 3%;
+}
+#daysleftContainerinsaved .clockContainer {
+	width: 9%;
+	background-size: 100% auto;
+	padding: 5% 0;
+}
+/* offer details */
+.wrapper .offer-detail-section { /*desktop offer details*/
+	margin: 10px;
+	padding: 0;
+	background: #fff;
+	border-radius: 5px;
+	position: relative;
+}
+.wrapper .offer-detail .offer-detail-btns input, .tellFriendText, #offerContainer #loading, #offerContainer #loadingManualLocatedOffers, .pagination,
+ #redeemOfferPopupContent .loginlabel, #redeemOfferPopupContent .loginsignupbuttoncontainer, #redeemOfferPopupContent .loginsignupbuttoncontainer input,
+ #extractedVoucherCodeFromHttpLink,.ui-dialog-content.ui-widget-content.locationDisableOrFail span , .tellfriendContainer, .categories a span{
+	text-align: center;	
+}
+.wrapper .offer-detail .offer-detail-btns input {
+	display: block;
+	padding: 12px 0;
+	background: #a7aeb6 url(../images/momentactivebg.png);
+	margin-bottom: 15px;
+	color: #fff;
+	border-radius: 5px;
+	font-size: .9em;
+	width: 100%;
+	border: 0;
+	cursor: pointer;
+}
+.wrapper .offer-detail .offer-detail-btns input.active {
+	background: #a7aeb6 url(../images/momentselectioncontainer.png);
+	color: #000
+}
+.wrapper .offer-detail span img {
+	vertical-align: middle
+}
+.wrapper .offer-detail-section .expiredTag {
+	background: transparent url("../images/expiredtag.png") no-repeat top
+		left;
+	left: 0;
+	padding: 7% 0;
+	position: absolute;
+	top: 0;
+	width: 79px;
+	z-index: 12;
+}
+.wrapper .expired .offer-detail {
+	opacity: .5;
+}
+.codeContainer .infowithLink, #voucherCodeSpan, #voucherInstructionsSpan {
+	color: #9DA4B9;
+	padding: 0 0 4%;
+	display: block;
+	text-align: center;
+}
+.codeContainer .codeContainerLinks {
+	padding-top: 35px;
+}
+.codeContainer .codeContainerLinks a {
+	background: url("../images/blue-strip40.png") repeat scroll 0 0
+		transparent;
+	border-radius: 5px;
+	color: #FFF;
+	font-size: .9em;
+	margin-right: 20px;
+	padding: 10px 15px;
+}
+.codeContainer .codeContainerLinks a.pale {
+	background-image: url("../images/pale-strip40.png");
+	color: #000
+}
+.clear {
+	clear: both
+}
+.savedlistButtonsContainer {
+	display: none;
+}
+.tellfriendContainer{
+	overflow:hidden;
+	display:block;
+	clear:both;
+	padding: 2% 1% 3% 0;
+	border-radius: 4px;
+}
+.tellfriendContainer .headingsInInstoreOfferDetails{
+	margin-bottom:3%;
+}
+.tellFriendText{
+	padding-bottom: 0.6em;
+	color: #949494;
+	font-weight: bold;
+}
+#offerContainer #loading, #offerContainer #loadingManualLocatedOffers{
+    top: 0;
+	position:relative;
+	left:0;
+	padding:2% 0 1% 0;
+}
+#loading .loadingText, #loadingManualLocatedOffers .loadingText{
+	overflow:hidden;
+	color:#fff;
+	margin:1% 0 0 0;
+	padding-bottom:1%;
+}
+.mapmenu #back{
+	font-size:1.2em;
+	background-position:left 60%;
+}
+.pagination a {
+    background: url(../images/carousel-dot-deselected.png) 0 0 no-repeat transparent;
+    width: 15px;
+    height: 15px;
+    margin: 0 5px 0 0;
+    display: inline-block;
+}
+.pagination a.selected {
+   background: url(../images/carousel-dot-selected.png) 0 0 no-repeat transparent;
+    cursor: default;
+}
+.pagination a span {
+    display: none;
+}
+.nearbyLocationsIMapHighend{
+	width:96%;
+	margin:0 0% 0 2%;
+}
+.clearfix {
+    float: none;
+    clear: both;
+}
+#redeemOfferPopupContent {
+	height: auto !important;
+	width: 100%!important;
+	top: 0 !important;
+	overflow: hidden;
+	box-shadow: 0px 3px 10px 0px grey;
+	padding: 0;
+	position: relative;
+}
+#redeemOfferPopupContent .loginlabel {
+	padding: 7.7% 10% 2.1% 10%;
+	color: #003152;
+	font-size: 1.35em;
+	display: block;
+	margin: 0 auto;
+	font-weight: bold;
+}
+#redeemOfferPopupContent .loginsignupbuttoncontainer {
+	width: 92%;
+	margin: 0 auto 2.6em auto;
+	overflow: hidden;
+	margin-top: 0.9em;
+}
+#redeemOfferPopupContent .closebuttonHighend {
+	float: right;
+	position: absolute;
+	top: 1.7em;
+	right: 1em;
+	font-size: 0.8em;
+	font-weight: bold;
+	background: url('../images/cancelcross.png') no-repeat scroll right 45%;
+	padding-right: 1.5em;
+	background-size: 19% auto;
+	cursor: pointer;
+	color: #fff;
+	text-shadow: 1px -1px 1px black;
+}
+
+#redeemOfferPopupContent .loginsignupbuttoncontainer input {
+	display: inline-block;
+	margin: 0;
+	padding: 3.8% 0;
+	width: 33%;
+	font-size: 1em;
+	text-transform: uppercase;
+	font-weight: bold;
+	border: 0 none;
+	border-radius: 7px;
+	cursor: pointer;
+	color: #fff;
+	text-shadow: 1px -1px 1px #777;
+	outline: none;
+}
+
+#extractedVoucherCodeFromHttpLink {
+	font-size: 1.8em;
+	color: #fff;
+	margin: 2% auto 5% auto;
+	display:block;	
+	word-wrap:break-word;
+}
+.codeContainer p{
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+}
+
+.expandedview .stockLeftInInstoreList{
+ top:35%;
+ right:0.5em;
+}
+#ExpandedStackedOfferContainer .ratingAndDaysLeftContainer .noOfDaysLeftInInstoreList {
+	font-size: .89em;
+	color: #7A7A7A;
+	font-weight: 700;
+	overflow: hidden;
+	position: absolute;
+	top: 35%;
+	padding: 0%;
+	background: url("../images/clock.png") no-repeat scroll 0 0 transparent;
+	background-position: left 40%;
+	padding-left: 8%;
+	background-size: 1.1em;
+	left:9.8em;
+}
+#distanceDescContainerInExpandedView .distanceIcon { 
+	background-position: 0 55% !important;
+}
+#signinpopupcontent .checkboxtext{
+	font-size:1em;
+	color:#4B4B4B;
+	font-family:Verdana,Arial,sans-serif/*{ffDefault}*/;
+	margin-top: 2%;
+	padding-bottom: 3.5%;
+}
+.savedofferscontainer{
+	margin-top:0 !important;
+}
+#acceptedOfferContainer .detailsRatingContainer{
+	width:100%;
+}
+#acceptedOfferContainer .daysLeft{
+	margin-left: 0%;
+	width: 55%;
+	left: 6.5em;
+	top: -0.1em;
+	color:#797979;
+}
+#acceptedOfferContainer .daysLeft img{
+	width: 1.1em;
+	top: 0.2em;
+	position: relative;
+}
+#acceptedOfferContainer .daysLeft span{
+	font-weight:bold;
+	font-size:0.9em;
+}
+
+.savedofferscontainer .daysleftContainer .clockContainer{
+	background-size:95%;
+	margin-top:2%;
+}
+#distanceIconDetails{
+	display:none;
+}
+#acceptedOfferContainer #distanceInMiles{
+	background: url("../images/distanceicon.png") no-repeat scroll 0 0 transparent;
+	background-position: left 50%;
+	background-size: 1em;
+	padding-left: 8%;
+	float: left;
+	margin-right: 0;
+	left: 0.5em;
+	width:46%;
+}
+.detailsRatingContainer{
+	overflow: hidden;
+	display: block;
+	position: absolute;
+	top: 5.5em;
+}
+#acceptedOfferContainer .momentDescContainer{
+	width:65%;
+}
+
+#locationInnerContainer {
+	margin: 0% auto auto;
+	overflow: hidden;
+	width: 95.6%;
+	background:#fff;
+	outline: none;
+	border-radius: 0px;
+	border: 1px solid #9E9E9E;
+	border-top: 2px solid #9E9E9E;
+}
+#userLocation{
+	background-size: 5.4% auto;
+	line-height: 1em;
+	border: none;
+	padding: 3.4% 0;
+	width: 85%;
+	color: #0C2459;
+	font-family: helvetica Neue, helvetica, arial;
+	font-size: 1.2em;
+	font-weight: 700;
+	outline: none;
+}
+#locationContainer #addressContainer{
+	width:95.6%;
+	margin:0 auto;
+	background-color:#fff;
+}
+#offerdetails #distanceIconDetails{
+	display:inline;
+}
+#offerdetails #offersRemaining .stock{
+	display: block;
+}
+.searchlocationmoments{
+	position: relative;
+	margin: 0 auto;
+}
+#addressContainer{
+	width:96%;
+	margin:0 auto;
+}
+.ui-widget-overlay{
+	width:100% !important;
+}
+.ui-dialog-content.ui-widget-content.locationDisableOrFail{
+	margin:0;
+	padding:0 0 10% 0;
+	height:auto!important;
+}
+.ui-dialog-content.ui-widget-content.locationDisableOrFail header, .searchlocationmoment{
+	width:100%;
+}
+.ui-dialog-content.ui-widget-content.locationDisableOrFail span{
+	padding: 5%;
+	display: block;
+	color: #4B4B4B;
+}
+.searchcloseicon {
+	background: url("../images/searchcloseicon.png") scroll no-repeat center center transparent;
+	background-size: 100% auto;
+	margin-right: 3%;
+	padding-bottom: 13.2%;
+	position: relative;
+	width: 10%;
+	display: none;
+	float: right;
+	top:0;
+}
+#locationInnerContainer .searchcloseicon{
+	width:6%;
+	top:-1px;
+	padding-bottom:12%;
+}
+
+.noto2Text{
+	text-decoration: underline;
+}
+#locationInnerContainer input{
+	padding-left:5px;
+}
+.buttonsBackgroundGradient, .momentLink.activeMomentLinkSliderHome {
+	background: #1a418f;
+    background: -moz-linear-gradient(top,  #3a5c9f 0%, #3a5c9f 50%, #1a418f 50%, #1a418f 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3a5c9f), color-stop(50%,#3a5c9f), color-stop(50%,#1a418f), color-stop(100%,#1a418f)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #3a5c9f 0%,#3a5c9f 50%,#1a418f 50%,#1a418f 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #3a5c9f 0%,#3a5c9f 50%,#1a418f 50%,#1a418f 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #3a5c9f 0%,#3a5c9f 50%,#1a418f 50%,#1a418f 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #3a5c9f 0%,#3a5c9f 50%,#1a418f 50%,#1a418f 100%); /* W3C */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+
+}
+.categoryLink canvas{
+	width:100% !important;
+	height:auto !important;
+}
+
+input[type="text"]::-ms-clear ,input[type="tel"]::-ms-clear{
+     display: none;
+ }
+.alreadyAcceptedMessageClass
+{
+	color: #FFF;
+	font-size: 1.2em;
+	width: 100%;
+	margin:1.5em 0 0 0; 
+	text-align:left;
+}
+.offerAlreadyRatedClass{
+	color: #FFF;
+	font-size: 1.2em;
+	width: 100%;
+	text-align: center;
+	padding: 5% 0;
+}

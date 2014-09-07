@@ -1,0 +1,1098 @@
+var pmresponsive = namespace('uk.co.o2.pmresponsive');
+
+pmresponsive.OfferDetails = Class({
+	constructor : function(requestInitiator, offerType) {
+		var self = this;
+		self.offerType = offerType;
+		self.shortenedURL="";
+		self.zeroRatingHelper = zeroRatingHelperStaticInstance;
+		self.mapManager = pmresponsive.MapManager.prototype.getInstance();
+		self.dialogManager = pmresponsive.DialogManager.prototype.getInstance();
+		self.characterLimitsForDetails = 200;
+		self.offerRedemption = new pmresponsive.OfferRedemption();
+		self.ajaxUtil = new pmresponsive.AjaxUtil();
+		self.map = new pmresponsive.Map();
+		self.interactiveMap = new pmresponsive.InteractiveMap();
+		self.userPreferences = new pmresponsive.UserPreferences();
+		self.locationDetector = new pmresponsive.LocationDetector();
+		self.requestInitiator = requestInitiator;
+		self.attachLinkHandlers();
+		self.attachEventHandlers();		
+        self.showHide();
+		self.showFragment();
+		self.seeMoreOfferDescription();
+		self.toggleDaysRemainingAndDistance();
+		self.AndroidHighendOfferContainerFix();
+		
+		if (self.offerType == 'instore') {
+			self.displayStaticMap();
+		} else {
+			self.generateCarousel();
+		}
+		self._populateHrefForTellAFriend();
+		self.shortTwitterURL();
+        self.fixAnimatedGifForAndroid();
+		self.hideLoadingText();
+		self.distanceInMiles = new pmresponsive.DistanceInMilesCalculator();
+		if(null!=self._getUrlParam('sms')){
+			self._updateDistanceInMiles();
+		};
+		
+	},
+	
+	_updateDistanceInMiles : function () {
+		var self= this;
+		self.locationDetector.detectUserLocation(self, function() {
+			self.distanceInMiles.updateDistanceInMiles($("#latitude").val(), $("#longitude").val(), offerLatitude, offerLongitude)
+		});
+	},
+	
+	_getUrlParam: function(queryParam){
+		var searchString = window.location.search.substring(1);
+		var paramCount;
+		var paramVal;
+		var params = searchString.split("&");
+		for (paramCount=0;paramCount<params.length;paramCount++) {
+			paramVal = params[paramCount].split("=");
+			if (paramVal[0] == queryParam) {
+				return unescape(paramVal[1]);
+			}
+		}
+		return null;
+	},
+	
+	showHide: function() {
+
+        var triggerClass = '.show-hide--trigger',
+            contentDataName = 'show-hide-content';
+
+        $(triggerClass).each(function() {
+            var content = $(this).data(contentDataName);
+            $(content).not('.open').not('.show').hide();
+        });
+
+        $(triggerClass).click(function(event) {
+            event.preventDefault();
+            var content = $(this).data(contentDataName);
+            $(this).toggleClass('open');
+            $(content).slideToggle(100).toggleClass('show');
+        });
+    },
+	
+	attachEventHandlers : function() {
+		var self = this;
+		$(window).hashchange(function() {
+			if (location.hash == '') {
+				$('#terms').hide();
+				$('#reportProblemDialog').hide();
+				$('#mapContainer').hide();
+				$('#offerContainer').show();
+				$('#offerdetails').show();
+				$('#tellfriendContainer').show();
+				if (self.offerType == 'online') {
+					self.generateCarousel();
+				}
+			} else {
+				self.showFragment();
+			}
+		});
+		$('#saveOfferDialog').hide();
+		var latitude = $("#latitude").val();
+		var longitude = $("#longitude").val();
+		$("#savedList").attr(
+				"href",
+				"/moments/savedoffers?latitude=" + latitude
+						+ "&longitude=" + longitude);
+		$('.pmiconContainerInUseNow').css({"visibility":"visible"});
+		if(deviceCategory=="desktop")
+			$('#rateAnOfferDialogDesktop').hide();
+    	else
+    		$('#rateAnOfferDialog').hide();
+		$('#reportProblemDialog').hide();
+		$('#tellfriendContainer').show();
+		
+	},
+	
+	showFragment: function() {
+		var hash = location.hash;
+		switch (location.hash) {
+		case '#terms':
+			$('#offerContainer').hide();
+			this.setViewportHeightForTerms();
+			$('#terms').show();
+			$(window).scrollTop(0);
+			break;
+		case "#map":
+			this.map.loadInteractiveMap();
+			break;
+		case "#reportProblem":
+			$('.reportContainer').hide();
+			this.reportProblem();
+			break;
+		}
+	},
+
+	setViewportHeightForTerms: function(){
+	    var varWindow = window;
+	    var innerOrClient = 'inner';
+	    if (!('innerHeight' in window)){
+	    	innerOrClient = 'client';
+	        varWindow = document.documentElement || document.body;
+	    }
+	    $("#terms").css({"min-height":varWindow[innerOrClient+'Height']+"px","margin-bottom":"10px"});
+	    
+	},	
+	hideLoadingText : function() {
+		$(".loadingText").hide();
+		$("#loading").css({
+			"width" : "25%"
+		});
+	},
+
+	attachLinkHandlers : function() {
+		var self = this;
+		$("img.lazy").lazyload({
+			threshold : 700
+		});
+
+		$("#moreOfferDesc").click(function() {
+			$("#descMore").hide();
+			$("#descLess").show();
+			return false;
+		});
+
+		$("#lessOfferDesc").click(function() {
+			$("#descLess").hide();
+			$("#descMore").show();
+			return false;
+		});
+		
+		$('#useNow').click(function() {/* for online/320 offers */
+			self.useOffer();
+			return false;
+		});
+		
+		$('#useNowTablet').click(function() {/* for instore tablet offers */
+			self.useOffer();
+			return false;
+		});
+		
+		$('#useNowDesktop').click(function() {/* for instore desktop offers */
+			// TODO: we are actually saving an offer and sending sms to the user
+			self.saveOffer(true);
+			return false;
+		});
+		
+		
+
+		$('#mapMarker').click(function() {
+			window.location.hash = "#map";
+			self.map.loadInteractiveMap();
+			$('#map_canvas').show();
+			self.mapManager.setViewportHeightForMap();
+			$('#tellfriendContainer').hide();
+		});
+
+		$('#iMapLink').click(function() {
+			window.location.hash = "#map";
+			self.map.loadInteractiveMap();
+			$('#map_canvas').show();
+			self.mapManager.setViewportHeightForMap();
+			$('#tellfriendContainer').hide();
+			return false;
+		});
+
+		$("#showMoreTerms").click(function() {
+			$("#moreTerms").hide();
+			$("#lessTerms").show();
+		});
+
+		$("#showLessTerms").click(function() {
+			$("#lessTerms").hide();
+			$("#moreTerms").show();
+		});
+
+		$("#showMoreRules").click(function() {
+			$("#moreRules").hide();
+			$("#lessRules").show();
+		});
+
+		$("#showLessRules").click(function() {
+			$("#lessRules").hide();
+			$("#moreRules").show();
+		});
+
+		$('#recentre_btn').click(function() {
+			if(location.hash == "#altlocationsmap"){
+				self.requestNearbyLocations();
+			} else{
+				self.map.loadInteractiveMap();
+			}
+		});
+
+		$('#saveForLater').click(function() {
+			$('#saveForLater').attr('disabled', 'disabled');	
+			self.saveOffer();
+			return false;
+		});
+
+		$('#savedForLater').click(function() {
+			self.showSavedOffers();
+		});
+
+		$('#do_not_show_dialog_again').click(function() {
+			if ($('#do_not_show_dialog_again').hasClass("checkboxClicked")) {
+				document.cookie = "dialog=false";
+			} else {
+				document.cookie = "dialog" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+			}
+		});
+		
+		if(deviceCategory=="desktop") {
+		$('#rateDiv').click(function() {
+			$('#ratingValue').val(0);
+			$('#userRatings').raty({
+					starOn : 'ratemomentactivestar.png',
+					starOff : 'ratemomentinactivestar.png',
+					click : function(score) {
+						$('.pmiconContainerInUseNow').css({"visibility":"hidden"});
+						$('#feedbackContainer').attr("style","display:block;");
+						$('.ratingPopupContainer .ui-dialog-buttonpane').addClass("ratingsBackground");
+						$('#ratingSubmit').attr("disabled",false);
+						$('#ratingSubmit').removeClass("disablebutton");
+						$('#ratingSubmit').addClass("activebutton");
+						$('#ratingValue').val(score);
+					}
+				});
+
+			self._rateAnOfferHandler();
+		});
+		} else {
+			$('#rateDiv').click(function() {
+			$('#ratingValue').val(0);
+			$('#userRatings').raty({
+					starOn : '/moments/_assets/images/star-on.png',
+					starOff : '/moments/_assets/images/star-off.png',
+					click : function(score) {
+						$('.pmiconContainerInUseNow').css({"visibility":"hidden"});
+						$('#feedbackContainer').attr("style","display:block;");
+						$('.ratingPopupContainer .ui-dialog-buttonpane').addClass("priority-button prioButtonStackedFix");
+						$('#ratingSubmit').attr("disabled",false);
+						$('#ratingSubmit').removeClass("disablebutton");
+						$('#ratingSubmit').addClass("activebutton");
+						$('#ratingValue').val(score);
+					}
+				});
+			self._rateAnOfferHandler();
+		});
+		}
+
+		$('#reportaproblem').click(function() {
+			self.reportAProblem();
+			return false;
+		});
+		
+		$('.closebutton').click(function() {
+			if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+		});
+		
+		$('span.closebutton').live("click",
+				function(event) {
+					if($(".ui-dialog-content").size() != 0) {
+						$(".ui-dialog-content").dialog('close');
+					}
+		});
+		
+		$('#reportProblem').click(function() {
+			self.changeHash();
+			return false;
+		});
+		
+
+		$('#termsAndCondition').click(function() {
+			if(deviceCategory=="desktop"){
+				$("#termsDesktop").dialog({
+					modal : true,
+					resizable : false,
+					draggable : false,
+					dialogClass : 'termspopup popupDialogParent',
+					open : function() {
+						$(window).scrollTop(0);
+					},
+					close : function() {
+						self.dialogManager.resetOverlayHeight();
+						$("#termsDesktop").dialog("destroy");
+					}
+				});
+				}
+        	else{
+        		$("#terms").dialog({
+    				modal : true,
+    				resizable : false,
+    				draggable : false,
+    				dialogClass : 'termspopup',
+    				open : function() {
+    					$(window).scrollTop(0);
+    				},
+    				close : function() {
+    					self.dialogManager.resetOverlayHeight();
+    				}
+    			});
+    			self.dialogManager.setOverlayHeight("#terms");
+        		}
+			return false;
+		});
+
+		$('#closeLinkReportProblemCategory').live("click",
+			function(event) {
+				if($(".ui-dialog-content").size() != 0) {
+					$(".ui-dialog-content").dialog('close');
+				}
+			}
+		);
+		
+		$('#closeLinkTermsAndCondition').click(function() {
+			if(deviceCategory=="desktop"){
+				if($(".ui-dialog-content").size() != 0) {
+					$(".ui-dialog-content").dialog('close');
+				}
+			}
+			else{
+				if($(".ui-dialog-content").size() != 0) {
+					$(".ui-dialog-content").dialog('close');
+				}
+			}
+		});
+		
+		$('#closeLinkTermsAndCondition').live("click",
+			function() {
+				if($(".ui-dialog-content").size() != 0) {
+					$(".ui-dialog-content").dialog('close');
+				}
+			}
+		);
+
+		$('#more', $('#offerDescription')).live("click",
+				function(event) {
+					event.preventDefault();
+					$(this).hide().prev().hide();
+					$(this).next().show();
+					return false;
+				});
+
+		$('#less', $('#offerDescription')).live("click",
+				function(event) {
+					event.preventDefault();
+					$('#moreDetailsContainer').hide();
+					$('#moreText').show();
+					$('#more').show();
+					return false;
+				});
+
+		$('#back').click(function() {
+			self._showOfferDetails();
+		});
+
+		$("#doNotRedeemOffer").click(function() {
+			if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+		});
+		
+		$('#closebutton').live("click",function(event) {
+			if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+		});
+		
+		$("#redeemOffer").click(function() {
+			if(deviceCategory=="desktop"){
+				if($(".ui-dialog-content").size() != 0) {
+					$(".ui-dialog-content").dialog('close');
+				}
+			}
+	    	else{
+	    		if($(".ui-dialog-content").size() != 0) {
+					$(".ui-dialog-content").dialog('close');
+				}
+	    	}
+			
+			self.offerRedemption.redeemOffer($('#offerId').val())
+		});	
+
+				$('#merchantWebLinkDesktop').click(function() {
+					if(deviceCategory=="desktop"){
+						if($($( "#merchantWebLinkDesktop" ).children()).is("#voucherCodeSpan")){
+										return;
+									}
+						self.showMerchantWebsite();
+						return true;
+					}
+										
+					if (!self.zeroRatingHelper
+								.verifyZeroRatingStatus()) {
+							self.zeroRatingHelper.showPromptPopup(
+									self.showMerchantWebsite, self);
+							return false;
+			 			}
+						return true;
+			 		});
+				
+				$('.merchantWebsitehighend').live("click",function() {
+					if (!self.zeroRatingHelper
+								.verifyZeroRatingStatus()) {
+							self.zeroRatingHelper.showPromptPopup(
+									self.showMerchantWebsite, self);
+							return false;
+			 			}
+						return true;
+			 		});
+				
+			$('#facebookClick').click(function() {
+			if(deviceCategory=="desktop"){
+				return true;
+			}
+			
+			else{
+			if (!self.zeroRatingHelper
+					.verifyZeroRatingStatus()) {
+				self.zeroRatingHelper.showPromptPopup(
+						self.shareOnFacebook, self);
+				return false;
+			}
+				return true;
+			}
+			
+		});
+
+		$('#twitterClick').click(function() {
+		
+			if(deviceCategory=="desktop"){
+				return true;
+			} 
+			else{
+			if (!self.zeroRatingHelper.verifyZeroRatingStatus()) {
+				self.zeroRatingHelper.showPromptPopup( self.shareOnTwitter, self);
+				return false;
+			}
+			return true;
+			}
+		});
+
+		$('#locationsNearbyLink').click(function() {
+			if ($('#mapContainer').hasClass('mapContainerDesktop')) {
+	            $('.mapContainerDesktop').css('margin-top',$('#staticHeader').height());
+	    	}
+			if(self.userPreferences.isDesktop()){
+				self.loadMapForNearbyLocations();				
+			}
+
+			return false;
+		});
+		
+		$(window).load(function(){
+			var marginTop = $('#staticHeader').height();
+	        $('#offerContainer').css({
+	            'margin-top': marginTop
+	        });
+		});
+	},
+
+	changeHash : function() {
+		window.location.hash = "#reportProblem";
+	},
+	
+	loadMapForNearbyLocations : function() {
+		$(window).scrollTop(0);
+
+		this.requestNearbyLocations();
+		
+		return false;
+	},
+	
+	shareOnFacebook : function() {
+		window.open($("#facebookClick").attr("href"), '_blank');
+	},
+
+	shareOnTwitter : function() {
+		window.open($("#twitterClick").attr("href"), '_blank');
+	},
+
+	shortTwitterURL:function(){
+		var self = this;
+		var data = {};
+		
+		var twitterOfferUrl=window.location.href;
+		
+		if(isFromOfferDetails!="true"){
+			twitterOfferUrl=applicationUrl+"offerdetails?offerId="+$("#offerIdForAccepted").val()+"&latitude="+$("#latitude").val()+"&longitude="+$("#longitude").val();
+		}
+		
+		data.longurl = twitterOfferUrl;
+		self.ajaxUtil.processRequest("shorturl", "GET", data, self._populateTwitterShortUrl, self);
+	},
+	
+	_populateTwitterShortUrl:function(response){
+		offerTitleLength = 140 - this._getApplicationUrlLength();
+		var offerTitle = this
+				._calculateOfferTitleForTwitter(offerTitleLength);
+		var replacedOfferTitle = this
+				._replaceSpecialCharacters(offerTitle);
+		shortenedURL=response;
+		$('#twitterClick').attr(
+				'href',
+				"https://twitter.com/intent/tweet?text="
+						+ tellAFriendMessagePart1
+						+ replacedOfferTitle
+						+  " " + tellAFriendMessagePart2
+						+ this._replaceSpecialCharacters($('.merchantName').text())
+						+ "&url="
+						+ this._replaceSpecialCharacters(shortenedURL)
+						+ "&counturl="
+						+ this._replaceSpecialCharacters(shortenedURL));
+
+		
+		
+	},
+	
+	
+	_populateHrefForTellAFriend : function() {
+		offerTitleLength = 140 - this._getApplicationUrlLength();
+		var offerTitle = this
+				._calculateOfferTitleForTwitter(offerTitleLength);
+		var replacedOfferTitle = this
+				._replaceSpecialCharacters(offerTitle);
+		
+		var offerUrl=window.location.href;
+		var fbLogo="https://"+window.location.hostname+"/moments/_assets/images/priority_new_logo_facebook.jpg";
+		
+		if(isFromOfferDetails!="true"){
+			offerUrl=applicationUrl+"offerdetails?offerId="+$("#offerIdForAccepted").val()+"&latitude="+$("#latitude").val()+"&longitude="+$("#longitude").val();
+		}
+		
+		$('#facebookClick').attr(
+						'href',
+						"https://www.facebook.com/dialog/feed?app_id="
+								+ "869858309696577&link="
+								+ this._replaceSpecialCharacters(offerUrl)
+								+ "&picture="
+								+ fbLogo
+								+ "&name="
+								+ tellAFriendMessagePart1
+								+ this._replaceSpecialCharacters($('#offertitles').text())
+								+  " " + tellAFriendMessagePart2
+								+ this._replaceSpecialCharacters($('.merchantName').text())
+								+ "&caption="
+								+ this._replaceSpecialCharacters($("#details").text())
+								+ "&description=&redirect_uri=http://www.facebook.com");
+		$('#googleClick').attr(
+						'href',
+						"https://plus.google.com/share?url=" + this._replaceSpecialCharacters(offerUrl));
+		$('#emailClick').attr(
+						'href',
+						'mailto:?subject=Priority O2 Offer&body=Check out this offer on Priority O2:' 
+						+ encodeURIComponent("\n")
+						+ this._replaceSpecialCharacters($('.priority-item__partner').text()) 
+						+ encodeURIComponent("\n") 
+						+ this._replaceSpecialCharacters($('#info p').text()) 
+						+ encodeURIComponent("\n")
+						+ this._replaceSpecialCharacters(offerUrl));					
+	},
+
+	requestNearbyLocations : function() {
+		var self = this;
+		var data = {};
+		data.offerId = $('#offerId').val();
+		self.locationDetector.detectUserLocation(self, function() {
+		data.latitude = $("#latitude").val();
+		data.longitude = $("#longitude").val();
+		self.ajaxUtil.processRequest("getnearbylocationsforoffer", "GET", data, self.populateNearbyLocationsForOffer, self)});
+	},
+
+	showMerchantWebsite : function() {
+		window.open($("#merchantWebsite").attr("targeturl"), '_blank');
+	},
+
+	populateNearbyLocationsForOffer : function(response) {
+		var self=this;
+		var imageName = categoryName.replace(/&/g, "").replace(/ /g, "").toLowerCase() + "maplogo.png";
+		window.location.hash="#altlocationsmap";
+		$('#offerdetails').hide();
+		$('#mapContainer').show();
+		self.mapManager.setViewportHeightForMap();
+		var interactiveMap = new pmresponsive.InteractiveMap();
+		if (response.length > 0) {
+			var locationCategoryImgMap = [];
+			for ( var index = 0; index < response.length; index++) {
+				var alternativeLocation = response[index];
+				locationCategoryImgMap.push({
+					categoryImage : imageName,
+					location : alternativeLocation
+				});
+			}
+			interactiveMap.drawMapForMultipleOffers("map_canvas", locationCategoryImgMap);
+		} else {
+			var userLocation = {
+				lat : $("#latitude").val(),
+				lon : $("#longitude").val()
+			};
+			var offerLocation = {
+				lat : offerLatitude,
+				lon : offerLongitude
+			};
+			interactiveMap.drawMapForSingleOffer("map_canvas",
+					userLocation, offerLocation,
+					"_assets/images/userlocationdot.png",
+					"_assets/images/" + imageName);
+		}
+		$('#map_canvas').show();
+		$('#tellfriendContainer').hide();
+		return false;
+	},
+
+	displayStaticMap : function() {
+		if(this.userPreferences.isDesktop()){
+			var mapOptions = {
+					"offerLatitude"	: offerLatitude,
+					"offerLongitude": offerLongitude,
+					"size"	: staticMapSize
+			};
+			new pmresponsive.Map().loadStaticMapForSingleOffer(mapOptions);
+		}
+	},
+
+	useOffer : function() {
+		if (this.hasExpiredField()) {
+			this._promptForRedemption();
+		} else {
+			this.offerRedemption.redeemOffer($('#offerId').val());
+		}
+	},
+	
+	hasExpiredField: function() {
+		var offerExpiresAfter = $('#offerExpiresAfter').text();
+		return offerExpiresAfter != "."
+	},
+
+	_promptForRedemption : function() {
+		var self = this;
+		if(deviceCategory=="desktop")
+			{
+			$("#redeemOfferPopupContentDesktop").dialog({
+				modal : true,
+				resizable : false,
+				closeOnEscape : true,
+				draggable : false,
+				dialogClass : 'redeemOfferPopupContentParent popupDialogParent',
+				close : function() {
+					self.dialogManager.resetOverlayHeight();
+					$("#redeemOfferPopupContentDesktop").dialog("destroy");
+				},
+				open : function() {
+				}
+			});
+			}
+    	else
+    		{
+			$("#redeemOfferPopupContent").dialog({
+				modal : true,
+				resizable : false,
+				closeOnEscape : true,
+				draggable : false,
+				dialogClass : 'redeemOfferPopupContentParent',
+				close : function() {
+					self.dialogManager.resetOverlayHeight();
+					$("#redeemOfferPopupContent").dialog("destroy");
+				},
+				open : function() {
+				}
+			});
+			self.dialogManager.setOverlayHeight("#redeemOfferPopupContent");
+    		}
+	},
+
+	saveOffer : function(sendSmsNotification) {
+		var self = this;
+		var data = self._getUserContext();
+		
+		if(sendSmsNotification != undefined && sendSmsNotification){
+			data.isSmsNotificationRequired = true;
+		}else{
+			data.isSmsNotificationRequired = false;
+		}
+			
+		self._processOffer("/moments/saveoffer", data, function(offer){self._saveOfferHandler(offer, data.isSmsNotificationRequired)});
+	},
+
+	showSavedOffers : function() {
+		var latitude = $("#latitude").val();
+		var longitude = $("#longitude").val();
+		window.location.href = "/moments/savedoffers?latitude=" + latitude + "&longitude=" + longitude;
+	},
+
+	reportProblem : function() {
+		$("#reportProblemDialog").show();
+		$("#offerContainer").hide();
+		$(window).scrollTop(0);
+	},
+
+	reportAProblem : function() {
+		var self = this;
+		$("#reportAProblemContent").dialog({
+				modal : true,
+				resizable : false,
+				draggable : false,
+				dialogClass : 'savePopupContainer reportAProblemContentparent',
+				open : function() {
+					$('#reportProblemName').val("");
+					$('#reportProblemDesc').val("");
+				},
+				close : function(){
+					$("#reportAProblemContent").dialog("destroy");
+				}
+		});
+		self.dialogManager.setOverlayHeight("#reportAProblemContent");
+		$('#reportProblemNameAndDesc').hide();
+		$('#reportProblemDesktopDialog').show();
+	},
+	
+	_calculateOfferTitleForTwitter : function(offerTitleLength) {
+		var offerTitle = $("#offertitles").text().substring(0,
+				offerTitleLength - 1);
+		return offerTitle;
+	},
+	
+	_getApplicationUrlLength : function() {
+		return applicationUrl.length;
+	},
+
+	_showOfferDetails : function() {
+		window.location.hash = "";
+		$('#mapContainer').hide();
+		$('#offerdetails').show();
+		$('#tellfriendContainer').show();
+	},
+	
+	_replaceSpecialCharacters : function(replacedOfferTitle) {
+		replacedOfferTitle = replacedOfferTitle.replace(/%/g, "%25");
+		replacedOfferTitle = replacedOfferTitle.replace(/&/g, "%26");
+		replacedOfferTitle = replacedOfferTitle.replace(/\+/g, "%2B");
+		replacedOfferTitle = replacedOfferTitle.replace(/\\/g, "%5C");
+		replacedOfferTitle = replacedOfferTitle.replace(/{/g, "%7B");
+		replacedOfferTitle = replacedOfferTitle.replace(/}/g, "%7D");
+		replacedOfferTitle = replacedOfferTitle.replace(/'/g, "%27");
+		replacedOfferTitle = replacedOfferTitle.replace(/ï¿½/g, "%C2%A3");
+		return replacedOfferTitle;
+	},
+
+	_setRating : function() {
+		var self = this;
+		var data = self._getUserContext();
+		data.userRating = $('#ratingValue').val();
+		data.merchantOfferId = $('#merchantOfferId').val();
+		data.locationId = $('#locationId').val();
+		data.userFeedback = $('#userFeedback').val().trim();
+		document.activeElement.blur();
+		self._processOffer("./setratingforoffer", data, self._getUpdatedRatings);
+	},
+
+	_getUpdatedRatings : function(statusCode) {
+		var self = this;
+		if(statusCode != "409"){
+			var data = self._getUserContext();
+			self._processOffer("./getrating", data, self._modifyRatings);
+			$('#inactiveRating').show();
+		}else{
+			$("#offerAlreadyRated").show();
+			$('#inactiveRating').hide();
+		}
+	},
+
+	_modifyRatings : function(response) {
+		var self = this;
+		var totalRating = $('#totalRating').html();
+		totalRating = totalRating.replace("(", "");
+		totalRating = totalRating.replace(")", "");
+		$('#totalRating').html("(" + response.totalRatings + ")");
+		$('#ratings').raty({
+			half : true,
+			score : response.averageRating,
+			readOnly : true
+		});
+	},
+
+	_getUserContext : function() {
+		var data = {};
+		if($('#offerId').val() != ""){
+			data.offerId = $('#offerId').val();
+		}else{
+			data.offerId = $('#offerIdForAccepted').val();
+		}
+		data.latitude = $('#latitude').val();
+		data.longitude = $('#longitude').val();
+		data.deviceId = $("#deviceId").val();
+		return data;
+	},
+
+	_processOffer : function(url, data, fHandler) {
+		var self = this;
+		self.ajaxUtil.processRequest(url, "POST", data, fHandler, this);
+	},
+	
+	checkIfShowDialog: function() {
+		var allCookies = document.cookie.split('; ');
+		for ( var i = 0; i < allCookies.length; i++) {
+			var cookiePair = allCookies[i].split('=');
+			if (cookiePair[0] == 'dialog') {
+				return false;
+			}
+		}
+		return true;
+	},
+	
+	showSaveOfferDialog: function() {
+		var self = this;
+		$("#saveOfferDialog").dialog({
+			modal : true,
+			resizable : false,
+			draggable : false,
+			buttons : {
+				OK : function() {
+					$(this).dialog('close');
+				}
+			},
+			close : function(event, ui) {
+				self.dialogManager.resetOverlayHeight();
+				$("#saveOfferDialog").dialog("destroy");
+			},
+			dialogClass : 'savePopupContainer popupDialogParent'
+		});
+		this.dialogManager.setOverlayHeight("#saveOfferDialog");
+	},
+	showSaveOfferDialogDesktop: function() {
+		var self = this;
+		$("#saveOfferDialogDesktop").dialog({
+			modal : true,
+			resizable : false,
+			draggable : false,
+			buttons : {
+				OK : function() {
+					$(this).dialog('close');
+				}
+			},
+			close : function(event, ui) {
+				self.dialogManager.resetOverlayHeight();
+				$("#saveOfferDialogDesktop").dialog("destroy");
+			},
+			dialogClass : 'savePopupContainer popupDialogParent'
+		});
+	},
+
+	_saveOfferHandler : function(offerSaved, isSmsNotificationRequired) {
+		var self = this;
+		if(isSmsNotificationRequired){
+			$('.offerDetailMerchantLogo').after("<div class='desktopUsenowMessage'>An SMS has been sent to your registered mobile device.</div>");
+			$("#useNowDesktop").attr("disabled", "disabled");
+		} else {
+			if (self.checkIfShowDialog()) {
+				self.showSaveOfferDialog();
+				self.showSaveOfferDialogDesktop();
+				$('#closeLinkInsaveAnOffer').click(function() {
+					if($(".ui-dialog-content").size() != 0) {
+						$(".ui-dialog-content").dialog('close');
+					}
+				});
+			} 
+		}
+		$('#saveForLater').hide();
+		$('#savedForLater').show();
+		$('#saveForLater').removeAttr('disabled');
+		this.ajaxUtil.processRequest("getsavedofferscount", "GET", {},
+				this.populateSavedOfferCount, this);
+	},
+
+	populateSavedOfferCount : function(savedOffersCount) {
+		if(savedOffersCount != 0){
+			$("#savedOffersCount").html("(" + savedOffersCount + ")");
+		}
+	},
+
+	_rateAnOfferHandler : function() {
+		var self = this;
+		if(deviceCategory=="desktop")
+			{
+			$("#rateAnOfferDialogDesktop").dialog({
+				modal : true,
+				resizable : false,
+				draggable : false,
+				open : function(event, ui) {
+					$("#userFeedback").val("");
+					$('#feedbackContainer').attr("style","display:none;");
+				},
+				close : function(event, ui) {
+					self.dialogManager.resetOverlayHeight();
+					$("#rateAnOfferDialogDesktop").dialog("destroy");
+				},
+				buttons : {
+					'Submit' : function() {
+						$('.pmiconContainerInUseNow').css({"visibility":"visible"});
+						$('#rateDiv').hide();
+						self._setRating();
+						$(this).dialog('close');
+					}
+				},
+				dialogClass : 'ratingPopupContainer popupDialogParent'
+			});
+			}
+    	else
+    		{
+    		$("#rateAnOfferDialog").dialog({
+    			modal : true,
+    			resizable : false,
+    			draggable : false,
+    			open : function(event, ui) {
+    				$("#userFeedback").val("");
+    				$('#feedbackContainer').attr("style","display:none;");
+    			},
+    			close : function(event, ui) {
+    				self.dialogManager.resetOverlayHeight();
+    				$("#rateAnOfferDialog").dialog("destroy");
+    			},
+    			buttons : {
+    				'Submit' : function() {
+    					$('.pmiconContainerInUseNow').css({"visibility":"visible"});
+    					$('#rateDiv').hide();
+    					self._setRating();
+    					$(this).dialog('close');
+    				}
+    			},
+    			dialogClass : 'ratingPopupContainer popupDialogParent'
+    		});
+    		self.dialogManager.setOverlayHeight("#rateAnOfferDialog");
+    		}
+		$('.ui-dialog-buttonpane button:contains(Submit)').attr("id", "ratingSubmit");
+		$('#ratingSubmit').addClass("disablebutton");
+		$('#ratingSubmit').attr("disabled", true);
+		$('.ui-dialog .ui-dialog-buttonpane').show();
+	},
+
+	seeMoreOfferDescription : function() {
+		var self = this;
+		$('#details').each(function() {
+						var offerDescription = $.trim($(this)
+								.text());
+						if (offerDescription.length < self.characterLimitsForDetails) {
+							$('#moreText').show();
+							$('#more').hide();
+							return;
+						} else {
+							var lessDetails = offerDescription
+									.slice(
+											0,
+											self.characterLimitsForDetails);
+							var moreDetails = offerDescription
+									.slice(
+											self.characterLimitsForDetails,
+											offerDescription.length);
+							$('#details').html(lessDetails);
+							$('#moreDetails').html(moreDetails);
+
+						}
+					});
+	},
+
+	/* toggle only for highend device. Not for desktop. */
+	toggleDaysRemainingAndDistance : function() {
+		var self = this;
+		if (document.getElementById('distanceInMilesHighendDiv') != null) {
+			var animationDelay = 4000;
+			var intervalId = setInterval(function() {
+				self.toggle($('#distanceInMilesHighendDiv'),
+						$('#daysOrOffersRemainingDiv'));
+			}, animationDelay);
+		}
+	},
+	
+	AndroidHighendOfferContainerFix : function() {
+		if(deviceCategory!="desktop") {
+			$('#offerContainer').css('margin-top','0px !important');
+		}
+	},
+
+	toggle : function(element1, element2) {
+		if (element1.is(':visible')) {
+			element1.css({
+				"display" : "none"
+			});
+			element2.css({
+				"display" : "block"
+			});
+		} else if (element2.is(':visible')) {
+			element2.css({
+				"display" : "none"
+			});
+			element1.css({
+				"display" : "block"
+			});
+		} else {
+			element1.css({
+				"display" : "none"
+			});
+			element2.css({
+				"display" : "block"
+			});
+		}
+	},
+	
+    fixAnimatedGifForAndroid: function(){
+
+        var ua = navigator.userAgent;
+
+        if (ua.indexOf("Android") >= 0) {
+
+            var androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8));
+
+            if (androidversion < 2.4) {
+
+                var spriteElement = $(".pmiconContainerInUseNow");
+                spriteElement.addClass("fixForDroid");
+                var frameWidth = 110;
+                var curPx = 1320;
+                var ti;
+
+                function animateSprite() {
+
+                    spriteElement[0].style.backgroundPosition = curPx-10 + 'px -20px';
+                    curPx = curPx - frameWidth;
+                    if (curPx <= 0) { curPx = 1320; }
+                    ti = setTimeout(animateSprite, 130);
+
+                }
+
+                animateSprite();
+
+            }
+        }
+    },
+    
+    generateCarousel: function() {
+    	$("#artworksContainer").carouFredSel({
+			 width: "100%",
+			 items: {
+				visible: 1,
+				minimum: 1
+			},
+			debug: true,
+			auto: false,
+			swipe: true,
+			pagination: {
+				container: "#page_container",
+				pauseOnHover: false
+			}
+		});
+    	$('#artworksContainer').css('left',($('.caroufredsel_wrapper').width()-120)/2);
+    }
+
+}).create();

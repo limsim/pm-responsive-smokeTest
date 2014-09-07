@@ -1,0 +1,669 @@
+var pmresponsive = namespace('uk.co.o2.pmresponsive');
+
+pmresponsive.Header = Class({
+
+    constructor: function(){
+        var self = this;
+        self.ajaxUtil = new pmresponsive.AjaxUtil();
+		self.scrollDetector = pmresponsive.ScrollDetector.prototype.getInstance();
+        self.loadSavedOffersCount();
+        self.attachLinkHandlers();
+        //self.adjustTopMarginForOfferContainer(); removed for mobile version
+        self.navMenuHeight = $("#nevigationmenu").height();
+        self.morePopUpHeight = $("#morepopUp").height();
+        self.categoryMenuHeight = $("#categoryMenu").height();
+        self.userPreferences = new pmresponsive.UserPreferences();
+        self.mapManager = pmresponsive.MapManager.prototype.getInstance();
+        self.mapManager.setListener(self, self.onMapStatusChanged);
+        self.iphoneSlider = new pmresponsive.IphoneSlider();
+        self.dialogManager = pmresponsive.DialogManager.prototype.getInstance();
+        self.mapStatus = null;
+        self.MAP_ON = "mapOn";
+        self.MAP_OFF = "mapOff";
+        self.direction = {
+            "up": "-=",
+            "down": "+="
+        }
+        self.scrollOffset = 1;
+        self.isPositionFixedSupported = new pmresponsive.BrowserSupport().isPositionFixed();
+        self.zeroRatingHelper = zeroRatingHelperStaticInstance;
+        self.showFragment();
+        self.hideAddressBar();
+        self.cookieChecker = cookieCheckerInstance;
+        self.showWarningWhenLandscapeOrientation(window.orientation);
+        self.mapManager.changeMapStatus();
+    },
+    
+    attachLinkHandlers: function(){
+        var self = this;
+        
+        if(("standalone" in window.navigator) && window.navigator.standalone){
+        	var node;
+        	document.addEventListener('click', function(event) {
+	        	node = event.target;
+	        	while(node.nodeName !== "A" && node.nodeName !== "HTML") {
+	        		node = node.parentNode;
+	        	}
+	        	if('href' in node && node.href.indexOf('http') !== -1 && node.target !== "_blank" && node.href.indexOf(document.location.host) !== -1){
+		        	event.preventDefault();
+		        	document.location.href = node.href;
+	        	}
+        	},false);
+        }
+        
+        $('#genericReportProblemDialog a').click(function(event) {
+			$('#genericReportProblemDialog').hide();
+			self.dialogRef = $( "#genericReportProblemNameAndDesc" ).dialog({
+				resizable: false,
+				draggable: false,
+				dialogClass: 'reportProblemParent popupDialogParent',
+				close: function(event, ui){
+	            	self.dialogManager.resetOverlayHeight();
+	            	$('#genericReportProblemDialog').show();
+	            	$( "#genericReportProblemNameAndDesc" ).dialog("destroy");
+	            },
+				open:function(){
+					$('#genericReportProblemName').val("");
+					$('#genericReportProblemDesc').val("");
+				}
+			});
+			$('#typeOfIssue').val(event.target.innerHTML);
+        });
+        
+        $('#genericReportProblemSubmit').click(function(e) {
+            self._sendMail(self.hideReportProblem);
+            return false;
+        });
+			
+        $('#closeLinkReportProblemCategoryGeneric').click(function() {
+        	if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+		});
+        
+		$('#closeLinkReportProblemDesktopContentGeneric').click(function() {
+			if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+		});
+		
+		$('#closeLinkReportProblemCategory').click(function() {
+			if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+		});
+		
+		$('#closeLinkReportProblemDesktopContent').click(function() {
+			if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+		});
+		
+		$('#closebutton').live("click",	function(event) {
+			if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+		});
+
+		
+		$('.closebutton').click(function() {
+			if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+		});
+        $('#genericReportProblemSubmitDesktop').click(function(e) {
+            self._sendMail(self.hideReportProblemDesktop);
+            return false;
+        });
+        
+        $("#genericReportProblem").click(function() {
+        	self.slideToggleMorePopup();
+            self.addGerericReportProblemHash();
+        	return false;
+		});
+        $('#reportProblemDesktopGenericDialog a').click(function(event) {
+			$('#reportProblemDesktopGenericDialog').hide();
+	       	$('#reportProblemNameAndDescGeneric').show();
+			$('#typeOfIssue').val(event.target.innerHTML);
+		});
+		
+		$('#closeLinkReportProblemContent').live("click",function(event) {
+			if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+		});
+		 $('#closeLinkReportProblemDesktopContent').live("click",function(event) {
+			 $('#reportProblemDesktopDialog').show();
+		     $('#reportProblemNameAndDesc').hide();
+		});
+
+		 $('#closeLinkReportProblemDesktopContentGeneric').live("click",function(event) {
+			 $('#reportProblemDesktopGenericDialog').show();
+		     $('#reportProblemNameAndDescGeneric').hide();
+		});
+		 
+        $("#headerStripes").live("click",function() {
+        	if($(".ui-dialog-content").size() != 0) {
+        		$(".ui-dialog-content").dialog('close');
+        	}
+            self.slideToggleMorePopup(this);
+            return false;
+        });
+        
+        $("#commonTermsAndConditions").click(function(){
+        	$("#headerStripes").click();
+        	self.createCommonTermsAndConditionPopup();
+            return false;
+        });
+        $("#commonTermsAndConditionsDesktop").click(function(){
+        	if($(".ui-dialog-content").size() != 0) {
+        		$(".ui-dialog-content").dialog('close');
+        	}
+        	self.commonTermsAndConditionPopupDesktopRef = self.createCommonTermsAndConditionPopupDesktop();
+            return false;
+        });
+        $("#termsAndConditionCommonCloseDesktop").click(function(){
+        	if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+        });
+		$("#profileTermsConditionLink").click(function(){
+			self.commonTermsAndConditionPopupDesktopRef = self.createCommonTermsAndConditionPopup();
+            return false;
+        });
+		$("#profileTermsConditionLinkDesktop").click(function(){
+			self.createCommonTermsAndConditionPopupDesktop();
+            return false;
+        });
+		$("#contentbacklink").live("click", function(){
+			// to get content dialog for closing 
+			var currentDialog = $(this).parent().parent();
+			if(deviceCategory=="desktop")
+				{
+					if(currentDialog.attr("id") == "rateAnOfferDialogDesktop"){
+						$('.pmiconContainerInUseNow').css({"visibility":"visible"});
+					}
+				}
+        	else
+        	{
+				if(currentDialog.attr("id") == "rateAnOfferDialog"){
+					$('.pmiconContainerInUseNow').css({"visibility":"visible"});
+				}
+			}
+			currentDialog.dialog('close');
+			self.adjustTopMarginForOfferContainer();
+			 });
+        
+        $("#reportaproblemlink").click(function(){
+        	if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+            $("#reportAProblemContentMorePopup").dialog({
+                modal: true,
+                resizable: false,
+                draggable: false,
+                dialogClass: 'reportAProblemContentMorePopupParent'+' popupDialogParent',
+                close: function(){
+                	if($(".ui-dialog-content").size() != 0) {
+                		$(".ui-dialog-content").dialog('destroy');
+                	}
+                },
+	            open: function(){
+	            	$("#genericReportProblemName").val("");
+	            	$("#genericReportProblemDesc").val("");
+	            }
+            });
+            $("#reportProblemDesktopGenericDialog").show();
+            $("#reportProblemNameAndDescGeneric").hide();
+            return false;
+        });
+        
+        $('#closeLinkReportProblemCategoryGeneric').live("click",
+        		function(){
+        			if($(".ui-dialog-content").size() != 0) {
+        				$(".ui-dialog-content").dialog('close');
+        			}
+        		});
+        
+        $('#morepopuplink').click(function(){
+            $("#morepopup").dialog({
+                modal: true,
+                resizable: false,
+                draggable: false,
+                dialogClass: 'morepopupParent'+ ' popupDialogParent',
+                close: function(){
+                	self.dialogManager.resetOverlayHeight();
+                	$("#morepopup").dialog("destroy");
+                }
+            });
+            self.dialogManager.setOverlayHeight("#morepopup");
+            return false;
+        });
+
+        if (deviceCategory != 'desktop') {
+            $("#currentCategory").click(function(){
+                $(window).scrollTop(0);
+                self.categoryHeightFixForIphone();
+                self.toggleCategoryMenu();
+                if (self.isPositionFixedSupported) {
+                    $("#offerContainer").toggleClass("fixedOfferCotainer");
+                }
+                else {
+                    $("#categoryMenu").addClass('categories3gs');
+                }
+
+                return false;
+            });
+        }
+        
+        $("#backlink").click(function(){
+            history.back();
+        });
+        $("#cookiedisabledbacklink").click(function(){
+        	history.back();
+        });
+        
+        $(window).resize(function(){
+            self.adjustTopMarginForOfferContainer();
+        });
+        
+        $("#mainTermsAndConditionsLink").click(function(){
+            $("#wrapperDiv").hide();
+            $("#mainTermsAndConditions").show();
+            $(window).scrollTop(0);
+            return false;
+        });
+        
+        $("#backToMomentsFromTermsLink").click(function(){
+            $("#mainTermsAndConditions").hide();
+            $("#wrapperDiv").show();
+            return false;
+        });
+        
+        $("#toggleMap").click(function(){
+        	if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+        	if(self.userPreferences.isMapEnabled()){
+        		self.userPreferences.setMapEnabled(false);
+        		self.mapManager.loadMap();
+        	}else{
+        		if (!self.zeroRatingHelper.verifyZeroRatingStatus()) {
+                    self.zeroRatingHelper.showPromptPopup(self.enableMap, self, "map");
+                }else{
+                	self.enableMap();
+                }
+        	}
+        	self.slideToggleMorePopup();
+        	return false;
+        });
+        
+        $('#locationDetTimeoutOk').click(function() {
+        	if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+        });
+        
+        $('#locationDetFailedOk').click(function() {
+        	if($(".ui-dialog-content").size() != 0) {
+				$(".ui-dialog-content").dialog('close');
+			}
+        });
+		
+		$('#cancelApp').click(function() {			
+        	$(".itunePromptContainer").hide();
+        	document.cookie = "tipx_cboofs=false";
+        	self.adjustTopMarginForOfferContainer();
+        	$('.categories').css({'height':'auto','overflow':'auto'});
+        	var marginTop = $('#staticHeader').height();
+            $('#genericReportProblemDialog').css({'margin-top': marginTop});
+        });
+		
+		 $('#mapOn').click(function() {
+		 	self.slideToggleMorePopup();
+        	if(self.mapStatus != self.MAP_ON){
+        		if (!self.zeroRatingHelper.verifyZeroRatingStatus()) {
+                    self.zeroRatingHelper.showPromptPopup(self.enableMap, self, "map");
+                }else{
+                	self.enableMap();
+                }
+        	}
+        	return false;
+		});
+        
+        $('#mapOff').click(function() {
+        	if(self.mapStatus != self.MAP_OFF){
+        		self.userPreferences.setMapEnabled(false);
+        		self.mapManager.loadMap();
+        	}
+        	return false;
+		});
+        
+        window.onorientationchange = function(event) {
+			self.showWarningWhenLandscapeOrientation(window.orientation);
+		};
+		
+		$(window).hashchange(function() {
+			if(location.hash == ""){
+				self.showMainPage();
+			} else {
+				self.showFragment();
+			}
+		});
+    },
+    
+    createCommonTermsAndConditionPopup: function() {
+    	var self = this;
+    	$("#commonTermsAndConditionpopupcontent").dialog({
+            modal: true,
+            resizable: false,
+            draggable: false,
+            dialogClass: 'commontermspopupcontentparent popupDialogParent',
+            open: function(){
+                $('#commonTermsAndConditionpopupcontent').scrollTop(0);
+            },
+            close: function(event, ui){
+            	self.dialogManager.resetOverlayHeight();
+            	$("#commonTermsAndConditionpopupcontent").dialog("destroy");
+            }
+        });
+        self.dialogManager.setOverlayHeight("#commonTermsAndConditionpopupcontent");		
+	},
+	createCommonTermsAndConditionPopupDesktop: function() {
+    	var self = this;
+    	return $("#commonTermsAndConditionpopupcontentDesktop").dialog({
+            modal: true,
+            resizable: false,
+            draggable: false,
+            dialogClass: 'commontermspopupcontentparent popupDialogParent',
+            open: function(){
+                $('.termsandconditionGenericDesktop').scrollTop(0);
+            },
+            close: function(event, ui){
+            	if($(".ui-dialog-content").size() != 0) {
+            		$(".ui-dialog-content").dialog("destroy");
+            	}
+            }
+        });	
+	},
+    
+	FixingScalingOnLandscape : function(){
+		var viewportmeta = document.querySelector('meta[name="viewport"]');
+		  viewportmeta.content = 'width=device-width,initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5, user-scalable=0';
+		},
+	
+	FixingScalingOnPortrait : function(){
+			var viewportmeta = document.querySelector('meta[name="viewport"]');
+		        	viewportmeta.content = 'width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0';
+		        	$('#staticHeader').css('width',Math.min(window.screen.width/window.devicePixelRatio,window.screen.height/window.devicePixelRatio));
+		        	if($('.popupDialogParent').length){
+			        	$('.popupDialogParent #priorityMomentsHeader').css('width',Math.min(window.screen.width/window.devicePixelRatio,window.screen.height/window.devicePixelRatio)); 
+				    }
+			},
+	
+    showWarningWhenLandscapeOrientation: function(orientation) {
+    	var ua = navigator.userAgent;
+    	var self = this;
+    	switch (orientation) {
+		case -90:
+		case 90:
+			if(deviceCategory=="desktop")
+				{
+				 // fix for Ipad landscape support
+					if (ua.indexOf("iPad") >= 0) {
+						$("#nearbyLocationsTabletPortrait").hide();
+						$("#nearbyLocations").show();
+					}
+				}
+			else{
+				$("#wrapperDiv").show();
+				/*
+				$("#wrapperDiv").hide();
+				$("#landscapeContent").show();
+	   			
+	   		     window.scrollTo(0, 1);
+	   		     if($('.popupDialogParent').length){
+	   		    	 $('.popupDialogParent').addClass('hidingOnOrientationChange');
+	   		    	 }
+	   		     if(this.isVisible("#morepopUp")){
+	   		    	 $('#morepopUp').addClass('hidingOnOrientationChange');
+	   		    	 }
+	   		  if ($('.container404Or500').is(':visible')) {
+	   			 $('.container404Or500').addClass('hidingOnOrientationChange');
+		       }
+	   		  if (ua.indexOf("Android") >= 0) {
+		            var androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8));
+		            if (androidversion > 2.4) {
+		            	self.FixingScalingOnLandscape();
+		            }}
+					*/
+			}
+			break;
+			default:
+			if (ua.indexOf("iPad") >= 0) {
+				$("#nearbyLocations").hide();
+				$("#nearbyLocationsTabletPortrait").show();
+			}
+			
+	        if (ua.indexOf("Android") >= 0) {
+	            
+				var androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8));
+					if (androidversion > 2.4) {
+						//self.FixingScalingOnPortrait();
+					}  
+				}
+				if($('.hidingOnOrientationChange').length){
+					//var unhidden=$('.hidingOnOrientationChange');
+					//unhidden.removeClass('hidingOnOrientationChange');
+				}
+					
+	        	if(!self.isVisible("#morepopUp")){
+	        		self.cookieChecker.cookiesEnabled();
+	        	}
+	       		if($('.offerContainerOfDetails').length || $('.savedAcceptedWrapper').length || $('.merchantImages').length){
+	    	    	window.scrollTo(0, 1);
+	        	}
+	       		$("#wrapperDiv").show();
+			//$("#landscapeContent").hide();	
+		}
+	       		$("#wrapperDiv").show();
+    },
+    
+    onMapStatusChanged: function(mapStatus) {
+    	if(mapStatus == this.MAP_ON){
+    		$("#mapOff").removeClass("activeMomentLinkSlider");
+    		$("#mapOn").addClass("activeMomentLinkSlider");
+    		this.mapStatus = mapStatus;
+    		$("#iPhoneSliderMap").animate({"left": "0"}, 1000);
+    	}else if(this.mapStatus != this.MAP_OFF){
+    		$("#mapOn").removeClass("activeMomentLinkSlider");
+    		$("#mapOff").addClass("activeMomentLinkSlider");
+    		this.mapStatus = mapStatus;
+    		$("#iPhoneSliderMap").animate({"left": "+=50%"}, 1000);
+    	}
+	},
+	
+    enableMap : function() {
+    	this.userPreferences.setMapEnabled(true);
+    	this.mapManager.loadMap();
+    },
+    
+    getCookie : function(c_name) {
+    	var i,x,y,ARRcookies=document.cookie.split(";");
+    	for (i=0;i<ARRcookies.length;i++) {
+	      x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+	      y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+	      x=x.replace(/^\s+|\s+$/g,"");
+	      if (x==c_name) {
+	    	  return unescape(y);
+	      }
+    	}
+    	return null;
+    },
+    
+    showSavedOffers: function(){
+    	var latitude = $("#latitude").val();
+        var longitude = $("#longitude").val();
+        window.location.href = "/moments/savedoffers?latitude=" + latitude + "&longitude=" + longitude;
+    },
+    
+    hideAddressBar: function(){
+        var href = window.location.href;
+        if (!window.location.hash && (href.indexOf("/reportproblem") == -1)) {
+          setTimeout(function(){
+                window.scrollTo(0, 1);
+            }, 2);
+        }
+    },
+    
+    adjustTopMarginForOfferContainer: function(){
+    	var marginTop = $('#staticHeader').height();
+		$(".overlay nav").css('top',$("#topHeader").outerHeight());
+        //$('#offerContainer').css({'margin-top': marginTop});
+    },
+    
+    toggleCategoryMenu: function(){
+        var self = this;
+        $("#categoryMenu").slideToggle(function(){
+            self.toggleIcon("#categoryMenu", "#currentCategory", "allCategoryActive", "allCategory");
+            self.adjustTopMarginForOfferContainer();
+            
+        });
+    },
+    
+    slideToggleMorePopup: function(headerStripeElement){
+        var self = this;
+		if($(".overlay ul li span").text() === "10") {
+			alert(this);	
+		}
+        if(!self.isVisible("#morepopUp")){
+			self.scrollDetector.unRegisterScrollListener();
+        	$("#priorityMomentsHeaderForMorePopup").show();
+        	if(deviceCategory=="desktop")
+        		$("#wrapperDiv").show();
+        	else
+        		$("#wrapperDiv").hide();
+        }else{
+			self.scrollDetector.preventScrollListener();
+        	$("#priorityMomentsHeaderForMorePopup").hide();
+        	$("#wrapperDiv").show();
+        	self.adjustTopMarginForOfferContainer();
+        	window.scrollTo(0, 1);
+        }
+        $("#morepopUp").slideToggle();
+    },
+   
+    toggleMorePopup: function(){
+        var self = this;
+        $("#morepopUp").hide();
+    },
+    
+    isVisible: function(element){
+        return $(element).is(":visible");
+    },
+    
+    toggleIcon: function(sourceElement, iconId, activeClass, inactiveClass){
+        if (this.isVisible(sourceElement)) {
+            $(iconId).addClass(activeClass);
+            $(iconId).removeClass(inactiveClass);
+        }
+        else {
+        
+            $(iconId).addClass(inactiveClass);
+            $(iconId).removeClass(activeClass);
+        }
+    },
+    
+    loadSavedOffersCount: function() {
+    	this.ajaxUtil.processRequest("getsavedofferscount", "GET", {}, this.populateSavedOfferCount, this);
+	},
+	
+	populateSavedOfferCount: function(savedOffersCount) {
+		if ((savedOffersCount != 0) && (deviceCategory == 'desktop')){
+			$("#savedOffersCount").html("(" + savedOffersCount + ")");
+		} else if ((savedOffersCount != 0) && (deviceCategory != 'desktop')){
+			$("#savedOffersCount").html(" " + savedOffersCount + " ");
+		}
+	},
+	setViewportHeightForSaveContainer: function(){
+		 var varWindow = window;
+		    var innerOrClient = 'inner';
+		    if (!('innerHeight' in window)){
+		    	innerOrClient = 'client';
+		        varWindow = document.documentElement || document.body;
+		    }
+		    var heightForSavedContainer = varWindow[innerOrClient+'Height'] + 130;
+		    $(".savedAcceptedWrapper").css({"height":heightForSavedContainer+"px"});
+	},
+	
+	showReportProblemDialog: function() {
+		$("#reportProblemDialog").hide();
+		$("#terms").hide();
+		$("#genericReportProblemDialog").show();
+		$("#offerContainer").hide();
+		$("#errorContentContainer").hide();
+		$("#headerOptions").hide();
+		var marginTop = $('#staticHeader').height();
+        $('#genericReportProblemDialog').css({'margin-top': marginTop});
+		$('#backlink').removeClass('invisible');
+		$(window).scrollTop(0);
+	},
+	
+	showMainPage: function() {
+		if($("#genericReportProblemNameAndDesc").is(':data(dialog)')){
+			$("#genericReportProblemNameAndDesc").dialog('close');
+		}
+		$("#genericReportProblemDialog").hide();
+		$("#offerContainer").show();
+		$("#errorContentContainer").show();
+		$("#headerOptions").show();
+		if(!$('#backlink').hasClass('invisible')){
+			$('#backlink').addClass('invisible');
+		}
+		$(window).scrollTop(0);
+	},
+	
+	addGerericReportProblemHash : function() {
+		window.location.hash = "#genericreportProblem";
+	},
+	
+	showFragment: function() {
+		if(location.hash == '#genericreportProblem'){
+			this.showReportProblemDialog();
+		}
+	},
+	
+	_sendMail: function(callback) {
+    	var typeOfIssue = $('#typeOfIssue').val();
+    	var description = $('#genericReportProblemDesc').val();
+		var userName = $('#genericReportProblemName').val();
+		var platform = navigator.platform;
+
+    	var jsonObj = {
+			"typeOfIssue":typeOfIssue,
+			"description":description,
+			"userName":userName,
+			"platform" :platform
+		}
+        this.ajaxUtil.processRequest("sendreportproblememail", "POST", jsonObj, callback, this);
+	},
+	
+	hideReportProblem: function() {
+		window.location.hash = "";
+	},
+	
+	hideReportProblemDesktop: function() {
+		if($(".ui-dialog-content").size() != 0) {
+			$(".ui-dialog-content").dialog('close');
+		}
+	},
+	categoryHeightFixForIphone: function() {
+		  var  screenHeight = screen.height;
+		if(screenHeight==480){
+			if($('#appLinkPromptContainer').is(':visible')){
+				$('.categories').css({'height':'26em','overflow':'scroll', '-webkit-overflow-scrolling':'touch' });
+			}
+		
+	    }}
+		   
+}).create();
