@@ -20,7 +20,7 @@ public class LoginPage2 {
 		registerPin = driver.findElement(By.id("registerPin"));
 
 		WebDriverWait driverWait = new WebDriverWait(driver, 5, 100);
-		driverWait.until(ExpectedConditions.visibilityOf(completeRegisterDiv));
+//		driverWait.until(ExpectedConditions.visibilityOf(completeRegisterDiv));
 	}
 
 	public LoginPage2 checkSubmitIsDisabled() {

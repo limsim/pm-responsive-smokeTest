@@ -4,6 +4,9 @@ import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by limsim on 06/09/2014.
@@ -15,6 +18,8 @@ public class LoginPage1 {
 
 	public LoginPage1(WebDriver driver) {
 		this.driver = driver;
+		WebDriverWait driverWait = new WebDriverWait(driver, 5, 100);
+//		driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("initRegister")));
 		msisdnTextField = driver.findElement(By.id("registerMsisdn"));
 	}
 
